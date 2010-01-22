@@ -6,6 +6,9 @@ from operator import itemgetter
 def to_mb(l, mb):
     return l*mb/10000000.
 
+def link_wrap(lc):
+    return "<a href=\"http://chibba.agtec.uga.edu/duplication/index/details?lc=%s\">%s</a>" % (lc, lc)
+
 def plot_map(hits, sp):
     fig, canvas, root = fig_init([8,4])
     # species name
@@ -102,7 +105,9 @@ def blast1(req):
         if hits: i+=1
         else: continue
         hits.sort(key=itemgetter(1))
-        msg += "<hr /> [%d] %d hits in %s genome.<br />"%(i, len(hits), sp_dict[k])
-        msg += "<font color='green'>%s</font><br />"%("  ".join(["%s(%s)"%(b,c) for a,b,c,d in hits]))
+        msg += "<hr /> [%d] %d hits in %s genome.<br />" % \
+                (i, len(hits), sp_dict[k])
+        msg += "<font color='green'>%s</font><br />" % \
+            ("  ".join(["%s(%s)"%( link_wrap(b),c) for a,b,c,d in hits]))
         msg += plot_map(hits,k)
     return msg+"<hr /><br />"+print_button

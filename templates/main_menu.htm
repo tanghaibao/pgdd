@@ -1,0 +1,44 @@
+<div id="sidebar">
+<a href="http://www.plantgenome.uga.edu/"><img src="http://www.plantgenome.uga.edu/publications2/brackets.jpg" alt="PGML Homepage" class="logo" /></a>
+<br /><hr />
+<div class="submenu">
+<%
+# This is a list of tuple representing the menu contents.
+# Each tuple is:
+#   name - the name of the menu item/page
+#   text - the text to be shown in the menu
+#   url  - the URL
+
+menu_items = [("home", "HOME", "home"),
+              ("dotplot", "DOT PLOT","dotplot"),
+              ("locus", "LOCUS SEARCH", "locus"),
+              ("blast", "MAP VIEW", "blast"),
+              ("downloads", "DOWNLOADS", "downloads"),
+              ("about", "ABOUT", "about"),
+              ("contact", "CONTACT", "contact"),
+              ("mcscan", "[MCSCAN]", "/duplication/mcscan")]
+"""("gbrowse", "GBROWSE", "/duplication/cgi-bin/lwgv.cgi?ann=simple.ann"),
+"""
+
+for name, text, url in menu_items:
+    attr = ""
+    if name == hlight:
+        attr = "class='hover'"
+    if not url.startswith("/"):
+        url = '/duplication/index/'+url
+    # begin
+%>
+    <div <%=attr%>><a href="<%=url%>"><%=text%></a></div>
+<%
+# end
+%>
+</div>
+<hr />
+Tools for synteny
+<hr />
+<a href="http://synteny.cnr.berkeley.edu/CoGe/"><img class="logo" src="http://synteny.cnr.berkeley.edu/CoGe/picts/CoGe-logo.png" alt="CoGe" width="120" height="50" /></a>
+<a href="http://genome.lbl.gov/vista/index.shtml"><img class="logo" src="http://genome.lbl.gov/vista/images/vistatitle.jpg" alt="VISTA" width="120" height="50" /></a>
+<a href="http://www.phytozome.net/"><img class="logo" src="http://www.jgi.doe.gov/software/phytozome_thumb.jpg" alt="Phytozome" width="120" height="50" /></a>
+<a href="http://bioinformatics.psb.ugent.be/plaza/"><img class="logo" src="/duplication/images/icons/PLAZA_gray.jpg" alt="Plaza" width="120" height="50" /></a>
+<a href="http://plants.ensembl.org"><img class="logo" src="http://www.ensembl.org/i/e-ensembl.png" alt="Ensemble" width="120" height="50" /></a>
+</div>

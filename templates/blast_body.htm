@@ -1,0 +1,35 @@
+<script type="text/javascript" src="/duplication/scripts/jblast.js"></script>
+<h1>Map your sequences to the genomes</h1>
+<p>
+The program did BLAST search and visualize the hits, then try to look for regions where proximal (syntenic) hits can be seen. For example, if you have multiple genetic markers in cotton surrounding a locus of interest, the <b>Map-View</b> tool will try to identify the corresponding region in Arabidopsis, etc., facilitating the comparative mapping across different taxa. The database includes the predicted proteins from several plant genome projects listed on the <a href='/duplication'>home page</a>. <font color="red">FASTA format is accepted</font>.
+</p>
+<button onclick="example('>Os02g0504900\nMLTLVGTRDSFAQSQAQLCAGMQLKAPTRAKYSQGFMPIGESDAYCALIPGLPEDLAKICLALVPRSQFPVMGSVSKRWMSFLESKEFIAVRKEVGKLEEWVYVLTADAGSKGSHWEVLGCSGQKHSPLPPMPGPTKAGFGVVVLDGKLFVIAGYAADHGKECVSDEVYRYDSCLNRWVELSKMNVARCDFACAEVNGMIYVAGGFGPNGDSLSSVEVYDAEQNKWTLIESLRRPRWGCFACSFEGKLYVMGGRSRFTIGNTRFVDVYNPNDNSWGEVKNGCVMVTAHAVLDKKLFCIEWKNQRSLAVFNPADNSWQKVPVPLTGSSSTRFCFGIHDGKLLLFSLDEEPCYKTLMYDPAAPTGSEWFTSELKPPGLCLCSVTIRA*');">Try this sequence</button><br />
+<textarea id="seq" rows="8" cols="80"></textarea>
+<table>
+    <tr>
+    <td><i>E</i>-value cutoff : </td>
+    <td><input type="text" size="5" value="1e-10" id="evalue" /></td>
+    <td> Low complexity filter : </td>
+    <td> On </td>
+    <td><input type="radio" value="T" name="filter" id="filter" checked="checked" /></td>
+    <td> Off </td>
+    <td><input type="radio" value="F" name="filter" id="filter" /></td>
+    </tr>
+</table>
+<table>
+    <tr>
+    <td> Sequence type : </td>
+    <td><select id="program" >
+        <option value="blastp" selected="selected">Protein sequences : use BLASTP</option>
+        <option value="blastx">Nucleotide sequences : use BLASTX</option>
+    </select></td>
+    </tr>
+</table>
+<table>
+    <tr>
+    <td><button onclick="talktoServer();">Map View!</button></td>
+    <td><button onclick="reset();">Reset</button></td>
+    </tr>
+</table>
+<br />
+<div class="monotext" id="display"></div>

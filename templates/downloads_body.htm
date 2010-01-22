@@ -1,0 +1,62 @@
+<script type="text/javascript">
+//<![CDATA[
+function download() {
+    var sp1 = $("#sp1").val();
+    var sp2 = $("#sp2").val();
+    if (sp1 && sp2){ 
+     if (sp1>sp2) {var temp=sp1; sp1=sp2; sp2=temp;}
+     na("Transferring data ... ");
+     window.location.href = '/duplication/data/'+sp1+'_'+sp2+'_block.zip';      }else{
+    na("Please select species from both lists.");
+    }
+}
+function na(st){
+    $("#result").html("<div class='monotext'><font color='red'>"+st+"</font></div>");
+}
+//]]>
+</script>
+<h1>Batch Downloads</h1>
+<p>You can download different datasets for the blocks listed in this database.
+</p>
+<table><tr>
+<td><select size="10" id="sp1">
+    <option value="at">A. thaliana (thale cress)</option>
+    <option value="cp">C. papaya (papaya) </option>
+	<option value="pt">P. trichocarpa (poplar)</option>
+    <option value="mt">M. trunculata (barrel medic) *</option>
+    <option value="gl">G. max (soybean) *</option>
+    <option value="vv">V. vinifera (grape)</option>
+	<option value="bd">B. distachyon (purple false brome) *</option>
+	<option value="os">O. sativa (rice)</option>
+	<option value="sb">S. bicolor (sorghum)</option>
+	<option value="zm">Z. mays (maize)</option>
+</select></td>
+<td><img src="/duplication/images/icons/versus.gif" alt="" /></td>
+<td><select size="10" id="sp2">
+    <option value="at">A. thaliana (thale cress)</option>
+    <option value="cp">C. papaya (papaya) </option>
+	<option value="pt">P. trichocarpa (poplar)</option>
+    <option value="mt">M. trunculata (barrel medic) *</option>
+    <option value="gl">G. max (soybean) *</option>
+    <option value="vv">V. vinifera (grape)</option>
+	<option value="bd">B. distachyon (purple false brome) *</option>
+	<option value="os">O. sativa (rice)</option>
+	<option value="sb">S. bicolor (sorghum)</option>
+	<option value="zm">Z. mays (maize)</option>
+</select></td>
+</tr></table>
+<br />
+<table><tr>
+<td><button onclick="javascript:download()">Download</button></td>
+<td><button onclick="javascript:window.location='/duplication/index/downloads';">Reset</button></td>
+</tr></table>
+<div id='result'></div>
+<br />
+<h3>Developer's notes</h3>
+<p>
+We use a different naming convention for the poplar dataset since the original namings for predicted models are un-informative. Translation to release ID for papaya, poplar and grape can be downloaded <a href='/duplication/mcscan/data/ID_conversion.txt'>here</a>. By doing so, we have enforced the gene names to be consistent with the <i>Arabidopsis</i> naming scheme.
+</p>
+<h3>Additional files</h3>
+<p>
+The DNA sequences, protein sequences and chromosomal locations for predicted gene models can be accessed <a href="/duplication/mcscan/index/results">here</a>.
+</p>

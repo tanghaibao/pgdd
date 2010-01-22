@@ -1,0 +1,109 @@
+<script type="text/javascript" src="/duplication/scripts/jdotplot.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+function ks_change(){
+  if ($("#cb1").attr("checked")){ 
+   $("#ks1").attr("disabled", false); $("#ks2").attr("disabled", false);
+  }
+  else{
+   $("#ks1").attr("disabled", true); $("#ks2").attr("disabled", true);
+  }
+ }
+function chr_change(){
+  if ($("#cb2").attr("checked")){
+   $("#chr1").attr("disabled", false); $("#chr2").attr("disabled", false);
+  }
+  else{
+   $("#chr1").attr("disabled", true); $("#chr2").attr("disabled", true);
+  }
+ }
+function add_chr(p){
+ var mylistindex = document.getElementById("sp"+p).selectedIndex;
+ var chr_numbers = new Array(5, 9, 19, 8, 20, 19, 5, 12, 10,10);
+ var k = chr_numbers[mylistindex];
+ var x = document.getElementById("chr"+p)
+ for (j=0;j<=20;j++){
+  x.remove(0)
+ }
+ for (i=1;i<=k;i++){
+  var optn = document.createElement("option");
+  optn.text=i;
+  x.options[x.length] = optn;
+ }
+ var sp1 = $("#sp1").val();
+ var sp2 = $("#sp2").val();
+ if (sp1 && sp2){ 
+  if (sp1>sp2) {var temp=sp1; sp1=sp2; sp2=temp;}
+  $("#ks_dist").attr("src", "/duplication/images/"+sp1+"_"+sp2+"_ks.png");
+ }
+}
+//]]>
+</script>
+<h1>Visualizing Syntenic Blocks</h1>
+        <table><tr><td>
+    <select size="12" id="sp1" onchange="add_chr('1')">
+    <optgroup label="Eudicots">
+    <option value="at">A. thaliana (thale cress)</option>
+    <option value="cp">C. papaya (papaya) </option>
+	<option value="pt">P. trichocarpa (poplar)</option>
+    <option value="mt">M. trunculata (barrel medic) *</option>
+    <option value="gl">G. max (soybean) *</option>
+    <option value="vv">V. vinifera (grape)</option>
+    </optgroup>
+    <optgroup label="Monocots">
+	<option value="bd">B. distachyon (purple false brome) *</option>
+	<option value="os">O. sativa (rice)</option>
+	<option value="sb">S. bicolor (sorghum)</option>
+	<option value="zm">Z. mays (maize)</option>
+    </optgroup>
+	</select></td>
+    <td><img src="/duplication/images/icons/versus.gif" alt="" /></td>
+    <td>
+    <select size="12" id="sp2" onchange="add_chr('2')">
+    <optgroup label="Eudicots">
+    <option value="at">A. thaliana (thale cress)</option>
+    <option value="cp">C. papaya (papaya) </option>
+	<option value="pt">P. trichocarpa (poplar)</option>
+    <option value="mt">M. trunculata (barrel medic) *</option>
+    <option value="gl">G. max (soybean) *</option>
+    <option value="vv">V. vinifera (grape)</option>
+    </optgroup>
+    <optgroup label="Monocots">
+	<option value="bd">B. distachyon (purple false brome) *</option>
+	<option value="os">O. sativa (rice)</option>
+	<option value="sb">S. bicolor (sorghum)</option>
+	<option value="zm">Z. mays (maize)</option>
+    </optgroup>
+	</select></td>
+	</tr></table>
+    <br />
+    <table><tr>
+    <td><input id="cb1" type="checkbox" value="1" onclick="ks_change()" /></td>
+    <td> Ks filter: </td>
+    <td> between </td>
+    <td><input id="ks1" type="text" size="3" value="0.5" disabled="disabled" /></td>
+    <td> and </td>
+	<td><input id="ks2" type="text" size="3" value="1.0" disabled="disabled" /></td>
+    <td><i>(use the toggle button below to identify the range)</i></td>
+		</tr></table><table><tr>
+    <td><input id="cb2" type="checkbox" value="1" onclick="chr_change()" /></td>
+    <td> Display only Chromosome </td>
+    <td><select id="chr1" disabled="disabled">
+    <option>1</option>
+    </select></td>
+    <td> vs. Chromosome </td>
+    <td><select id="chr2" disabled="disabled">
+    <option>1</option>
+    </select></td>
+    </tr></table>
+    <br />
+    <table><tr>
+			<td><button onclick="javascript:talktoServer()">Dotplot</button></td>
+			<td><button onclick="javascript:window.location='/duplication/index/dotplot';">Reset</button></td>
+	<td><button id="ks_toggle">Toggle Ks distribution</button></td>
+    </tr></table>
+<%-- Here is the query output for this page --%>
+<br />
+<img style="display: none" src="" class="articleimg" id="ks_dist" alt="" />
+<div class="monotext" id="display"></div>
+<%=output%>

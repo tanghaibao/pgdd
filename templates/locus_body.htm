@@ -1,0 +1,34 @@
+<link rel="stylesheet" href="http://dev.jquery.com/view/trunk/plugins/autocomplete/jquery.autocomplete.css" type="text/css" />
+<script type="text/javascript" src="http://dev.jquery.com/view/trunk/plugins/autocomplete/lib/jquery.bgiframe.min.js"></script>
+<script type="text/javascript" src="http://dev.jquery.com/view/trunk/plugins/autocomplete/lib/jquery.dimensions.js"></script>
+<script type="text/javascript" src="http://dev.jquery.com/view/trunk/plugins/autocomplete/jquery.autocomplete.js"></script>
+
+<script type="text/javascript" src="/duplication/scripts/jlocus.js"></script>
+<h1>Locus Search</h1>
+<p>Obtain a report of related syntenic regions in multiple species by locus identifier<br />You can choose e.g.  
+<a href="javascript:example('At1g25460');">At1g25460</a>,
+<a href="javascript:example('Os02g0504900');">Os02g0504900</a>,
+<a href="javascript:example('Glyma15g05790');">Glyma15g05790</a>, 
+<a href="javascript:example('Zm2g000039');">Zm2g000039</a> 
+</p>
+<table>
+<tr>
+<td><b>Locus identifier </b></td>
+<td><input type="text" id="lc" name="lc" size="30" /></td>
+<td><button onclick="talktoServer();">Submit</button></td>
+<td><button onclick="reset();">Reset</button></td>
+</tr>
+</table>
+<table>
+<tr>
+    <td><b>Display region</b></td>
+    <td><input type="radio" name="sc" id="sc1" value="50000" />50kb </td>
+    <td><input type="radio" checked="checked" name="sc" id="sc2" value="100000" />100kb </td>
+    <td><input type="radio" name="sc" id="sc3" value="200000" />200kb </td>
+    <td><input type="radio" name="sc" id="sc4" value="500000" />500kb </td>
+</tr>
+</table>
+<%-- Here is the query output for this page --%>
+<br />
+<div class="monotext" id="display"></div>
+<%=output%>

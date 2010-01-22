@@ -7,7 +7,7 @@ def to_mb(l, mb):
     return l*mb/10000000.
 
 def link_wrap(lc):
-    return "<a href=\"http://chibba.agtec.uga.edu/duplication/index/details?lc=%s\">%s</a>" % (lc, lc)
+    return "<a href=\"http://chibba.agtec.uga.edu/duplication/index/details?lc=%s\" target=\"_blank\">%s</a>" % (lc.rsplit(".")[0], lc)
 
 def plot_map(hits, sp):
     fig, canvas, root = fig_init([8,4])

@@ -144,7 +144,9 @@ def plot1(sql1, root, ax, canvas, fig, ks, species1,species2,ks_low,ks_high):
     s += "</map>"
     if ks: s+="%i pairs of anchor points plotted (ks filter: %.1f to %.1f), <font color='red'> click </font> on block to zoom in <br /><img class='articleimg' src='/duplication/usr/%s' usemap='#mymap' alt='' />"%(len(results),ks_low, ks_high, fi)
     else: s+="%i pairs of anchor points plotted, <font color='red'> click </font> on block to zoom in <br /><img class='articleimg' src='/duplication/usr/%s' usemap='#mymap' alt='' /><br />"%(len(results),fi)
-    return s+"""&nbsp;<button onclick="window.location.href='/duplication/scripts/to_pdf?imagename=%s';">Export to pdf</button>"""%fa+print_button
+    img_location = "/duplication/scripts/to_pdf?imagename=%s" % fa
+    return s+"&nbsp;<img src='/duplication/images/icons/pdf.png' onclick=\"window.location.href='%s';\""\
+            "alt='Export to pdf' />" % img_location + print_button
 
 def plot2(sql1, root, ax, canvas, fig, chr1, chr2, ks, species1,species2,ks_low,ks_high):
     # length list, label list, br is x-axis, at is y-axis
@@ -183,4 +185,6 @@ def plot2(sql1, root, ax, canvas, fig, chr1, chr2, ks, species1,species2,ks_low,
     if ks: s+="%i pairs of anchor points plotted (ks filter: %s to %s) <br />"%(len(results),ks_low,ks_high)
     else: s+="%i pairs of anchor points plotted <br />"%len(results)
     s+="<a href='/duplication/index/block_details?chr_low=%i&amp;chr_high=%i&amp;note=%s_%s' target='_blank'><img class='articleimg' src='/duplication/usr/%s' title='Click to view all segments in this plot' alt='Click to view all segments in this plot' /></a><br />"%(chr1,chr2,species1,species2,fi)
-    return s+"""&nbsp;<button onclick="window.location.href='/duplication/scripts/to_pdf?imagename=%s';">Export to pdf</button>"""%fa+print_button
+    img_location = "/duplication/scripts/to_pdf?imagename=%s" % fa
+    return s+"&nbsp;<img src='/duplication/images/icons/pdf.png' onclick=\"window.location.href='%s';\""\
+            "alt='Export to pdf' />" % img_location + print_button

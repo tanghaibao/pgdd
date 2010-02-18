@@ -11,9 +11,7 @@ def index(req, imagename):
         img = Image(.6*inch, LETTER[1]/2.0-(LETTER[0]-1.2*inch)/2.0, LETTER[0]-1.2*inch, LETTER[0]-1.2*inch, inPath)
         IMAGES.append(img)
 
-    id = 0
     for img in IMAGES:
-        id+=1
         d = Drawing(LETTER[0], LETTER[1])
         d.add(img)
         outPath = img.path.split('.')[0]+'.pdf'

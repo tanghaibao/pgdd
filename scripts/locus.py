@@ -239,4 +239,7 @@ def segplot1(genelt_a,genelt_b,hit_col,block_results,lc,species,chr_a,chr_b,star
         root.add_patch(arrow_b)
 
     fa, fi = fig_terminate(root, canvas)
-    return "<img class='articleimg' alt='' src='/duplication/usr/%s' />"%fi
+    img_location = "/duplication/scripts/to_pdf?imagename=%s" % fa
+    return "<img class='articleimg' alt='' src='/duplication/usr/%s' />" % fi + \
+           "<img src='/duplication/images/icons/pdf.png' alt='Export to pdf' " + \
+           "onclick=\"window.location.href='%s'\" />" % img_location 

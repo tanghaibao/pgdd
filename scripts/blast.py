@@ -7,7 +7,8 @@ def to_mb(l, mb):
     return l*mb/10000000.
 
 def link_wrap(lc):
-    return "<a href=\"http://chibba.agtec.uga.edu/duplication/index/details?lc=%s\" target=\"_blank\">%s</a>" % (lc.rsplit(".")[0], lc)
+    return "<a href=\"http://chibba.agtec.uga.edu/duplication/index/details?lc=%s\" target=\"_blank\">%s</a>" % \
+            (lc.rsplit(".")[0], lc)
 
 def plot_map(hits, sp):
     fig, canvas, root = fig_init([8,4])
@@ -61,7 +62,11 @@ def plot_map(hits, sp):
                 [ytop-pos, ytop-pos], "g-")
 
     fa, fi = fig_terminate(root, canvas)
-    return "<img src='/duplication/usr/%s' class='articleimg' alt='' />"%fi
+    img_location = "/duplication/scripts/to_pdf?imagename=%s" % fa
+    return "<img src='/duplication/usr/%s' class='articleimg' alt='' />" % fi + \
+           "<img src='/duplication/images/icons/pdf.png' alt='Export to pdf' " + \
+           "onclick=\"window.location.href='%s'\" />" % img_location 
+
 
 def blast1(req):
     """blast commandline to run blastall with three use-input params
@@ -110,4 +115,4 @@ def blast1(req):
         msg += "<font color='green'>%s</font><br />" % \
             ("  ".join(["%s(%s)"%( link_wrap(b),c) for a,b,c,d in hits]))
         msg += plot_map(hits,k)
-    return msg+"<hr /><br />"+print_button
+    return msg+"<hr /><br />" + print_button

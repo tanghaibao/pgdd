@@ -33,7 +33,7 @@ def locus1(req):
         for d in results:
             si+=1
             data+=show_seg(d[0],lc,d[1],si,sc)
-        return data+print_button
+        return data + "<br /><hr />" + print_button
 
 def show_seg(seg_id,lc,note,si,sc):
     sql2 = """SELECT * from block WHERE block_no='%s' AND note='%s' ORDER BY end5_1"""%(seg_id,note)

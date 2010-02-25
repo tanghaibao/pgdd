@@ -34,7 +34,10 @@ function add_chr(p){
  var sp2 = $("#sp2").val();
  if (sp1 && sp2){ 
   if (sp1>sp2) {var temp=sp1; sp1=sp2; sp2=temp;}
+  $("#sp1t").html("<font color='green'>"+sp1+"</font>");
+  $("#sp2t").html("<font color='green'>"+sp2+"</font>");
   $("#ks_dist").attr("src", "/duplication/images/"+sp1+"_"+sp2+"_ks.png");
+  $("#ks_toggle").html("Toggle "+sp1+"-"+sp2+" Ks distribution");
  }
 }
 //]]>
@@ -87,11 +90,11 @@ function add_chr(p){
     <td><i>(use the toggle button below to identify the range)</i></td>
 		</tr></table><table><tr>
     <td><input id="cb2" type="checkbox" value="1" onclick="chr_change()" /></td>
-    <td> Display only Chromosome </td>
+    <td> Display only</td> <td id="sp1t"></td> <td>chromosome </td>
     <td><select id="chr1" disabled="disabled">
     <option>1</option>
     </select></td>
-    <td> vs. Chromosome </td>
+    <td> vs.</td> <td id="sp2t"></td> <td>chromosome </td>
     <td><select id="chr2" disabled="disabled">
     <option>1</option>
     </select></td>

@@ -39,7 +39,7 @@ function add_chr(p){
   $("#sp1t").html("<font color='green'>"+sp1t+"</font>");
   $("#sp2t").html("<font color='green'>"+sp2t+"</font>");
   $("#ks_dist").attr("src", "/duplication/images/"+sp1+"_"+sp2+"_ks.png");
-  $("#ks_toggle").html("Toggle "+sp1t+" - "+sp2t+" Ks distribution");
+  $("#ks_toggle").html("View "+sp1t+" - "+sp2t+" Ks distribution");
  }
 }
 //]]>
@@ -84,12 +84,12 @@ function add_chr(p){
     <br />
     <table><tr>
     <td><input id="cb1" type="checkbox" value="1" onclick="ks_change()" /></td>
-    <td> Ks filter: </td>
+    <td> <i>Ks</i> filter: </td>
     <td> between </td>
     <td><input id="ks1" type="text" size="3" value="0.5" disabled="disabled" /></td>
     <td> and </td>
 	<td><input id="ks2" type="text" size="3" value="1.0" disabled="disabled" /></td>
-    <td><i>(use the toggle button below to identify the range)</i></td>
+    <td><i>(use view Ks button below to identify the range)</i></td>
 		</tr></table><table><tr>
     <td><input id="cb2" type="checkbox" value="1" onclick="chr_change()" /></td>
     <td> Display </td> <td id="sp1t"></td> <td>chromosome </td>
@@ -105,7 +105,7 @@ function add_chr(p){
     <table><tr>
 			<td><button onclick="javascript:talktoServer()">Dotplot</button></td>
 			<td><button onclick="javascript:window.location='/duplication/index/dotplot';">Reset</button></td>
-	<td><button id="ks_toggle">Toggle Ks distribution</button></td>
+	<td><button id="ks_toggle">View Ks distribution</button></td>
     </tr></table>
 <%-- Here is the query output for this page --%>
 <br />

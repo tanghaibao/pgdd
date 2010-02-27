@@ -90,7 +90,7 @@ def get_external(lc, sp):
     fonttag = "<font color='red'> External Links </font> : "
     if sp=='Arabidopsis':
         return fonttag+"""<a href='http://www.tigr.org/tigr-scripts/euk_manatee/shared/ORF_infopage.cgi?db=ath1&amp;orf=%s'> TIGR </a> , <a href='http://mips.gsf.de/cgi-bin/proj/thal/search_gene?code=%s'> MIPS </a> , <a href='http://signal.salk.edu/cgi-bin/tdnaexpress?GENE=%s&amp;FUNCTION=&amp;TDNA=&amp;INTERVAL=50'> SALK </a> , <a href='http://arabidopsis.org/servlets/TairObject?type=locus&amp;name=%s'> TAIR </a>, <a href='http://www.floralgenome.org/tribedb/search.pl?action=keyword_results&type=id&term=%s'>PlantTribes</a>"""%(lc,lc,lc,lc,lc) 
-    return ""
+    return fonttag + "<a href='http://genomevolution.com/CoGe/FeatView.pl?accn=%s'>CoGe</a>" % lc
 
 def details1(req, lc):
     lc = lc.strip().capitalize()

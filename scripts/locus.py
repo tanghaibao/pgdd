@@ -87,10 +87,11 @@ def show_seg(seg_id,lc,note,si,sc):
     return data
 
 def get_external(lc, sp):
-    fonttag = "<font color='red'> External Links </font> : "
+    external = "<font color='red'> External links </font> : "
     if sp=='Arabidopsis':
-        return fonttag+"""<a href='http://www.tigr.org/tigr-scripts/euk_manatee/shared/ORF_infopage.cgi?db=ath1&amp;orf=%s'> TIGR </a> , <a href='http://mips.gsf.de/cgi-bin/proj/thal/search_gene?code=%s'> MIPS </a> , <a href='http://signal.salk.edu/cgi-bin/tdnaexpress?GENE=%s&amp;FUNCTION=&amp;TDNA=&amp;INTERVAL=50'> SALK </a> , <a href='http://arabidopsis.org/servlets/TairObject?type=locus&amp;name=%s'> TAIR </a>, <a href='http://www.floralgenome.org/tribedb/search.pl?action=keyword_results&type=id&term=%s'>PlantTribes</a>"""%(lc,lc,lc,lc,lc) 
-    return fonttag + "<a href='http://genomevolution.com/CoGe/FeatView.pl?accn=%s'>CoGe</a>" % lc
+        external += """<a href='http://mips.gsf.de/cgi-bin/proj/thal/search_gene?code=%s'> MIPS </a> <a href='http://signal.salk.edu/cgi-bin/tdnaexpress?GENE=%s&amp;FUNCTION=&amp;TDNA=&amp;INTERVAL=50'> SALK </a> <a href='http://arabidopsis.org/servlets/TairObject?type=locus&amp;name=%s'> TAIR </a> <a href='http://www.floralgenome.org/tribedb/search.pl?action=keyword_results&type=id&term=%s'>PlantTribes</a> """ % (lc,lc,lc,lc) 
+    external += "<a href='http://genomevolution.com/CoGe/FeatView.pl?accn=%s'>CoGe</a>" % lc
+    return external
 
 def details1(req, lc):
     lc = lc.strip().capitalize()
@@ -108,6 +109,7 @@ def details1(req, lc):
     <font color="red"> Position </font> : %s ( 5`- %s .. %s -3` )<br />
     <font color="red"> Annotation </font> : <font color="green">%s</font><br />
     %s
+    <br /><font color="red"> PGDD synteny </font> : <a href="http://chibba.agtec.uga.edu/duplication/index/locus_app?lc=%s">%s</a>
     <br /><br /><br />
     <font color="red"> Protein </font>[<a href='/duplication/index/blast_app/?id=%s&amp;seq=%s'>Map View</a>] <br />%s<br />
     <br /><br />
@@ -115,7 +117,8 @@ def details1(req, lc):
     <br /><br /><br />
     """
     for datum in results:
-        s+=s1%(datum[1],datum[2],datum[3],datum[4],get_external(lc,sp),lc,datum[5],format_seq(datum[5]),format_seq(datum[6]))
+        s+=s1%(datum[1],datum[2],datum[3],datum[4],get_external(lc,sp),lc,lc,lc,\
+                datum[5],format_seq(datum[5]),format_seq(datum[6]))
     return s+'<br /><br />'
 
 def block_details1(req, seg_id, chr_low, chr_high, lc, note):
@@ -193,13 +196,15 @@ def segplot1(genelt_a,genelt_b,hit_col,block_results,lc,species,chr_a,chr_b,star
     root.text(sp+bw*3,mp,'%s %s'%(species_a.capitalize(),chr_a),color='r')
     root.text(sp+bw*3,mt,'%s %s'%(species_b.capitalize(),chr_b),color='r')
     # species names
-    root.text(sp+bw*3,mp+.15,sp_dict[species_a.lower()],va="center",fontweight="bold",color="k")
-    root.text(sp+bw*3,mt-.15,sp_dict[species_b.lower()],va="center",fontweight="bold",color="k")
+    root.text(sp+bw,mp+.15,sp_dict[species_a.lower()],va="center",fontweight="bold")
+    root.text(sp+bw,mt-.15,sp_dict[species_b.lower()],va="center",fontweight="bold")
     # physical position
     root.text(sp+bw*3,mp-.07,'%.2f-%.2fMb'%(start_a/1000000.,stop_a/1000000.),size=8)
     root.text(sp+bw*3,mt-.07,'%.2f-%.2fMb'%(start_b/1000000.,stop_b/1000000.),size=8)
         
     scale = 1.*(sp-st)/(stop_a-start_a)
+    # simple gene names on the plot
+    _ = lambda x: x[-5:].replace("g", "")
     for b in genelt_b:
         tail_b, tip_b, flag_b = get_border(b[2],b[3],start_b,stop_b)
         if flag_b: arrow_b = Rectangle(((tail_b-start_b)*scale+st,mt-.015),(tip_b-tail_b)*scale,.03)
@@ -225,8 +230,8 @@ def segplot1(genelt_a,genelt_b,hit_col,block_results,lc,species,chr_a,chr_b,star
                 cc = 'r'
                 # highlight the match
                 root.add_patch(Polygon([[tail_aa, mp-.06],[tip_aa, mp-.06],[tip_bb, mt+.06],[tail_bb, mt+.06]], fc="gold", ec="gold", alpha=.5))
-            root.text(center_a,mp+.06,a[0][-5:],rotation=45,color=cc,size=7,horizontalalignment='center')
-            root.text(center_b,mt-.18,datum[other_col][-5:],rotation=45,color=cc,size=7,horizontalalignment='center')
+            root.text(center_a,mp+.06,_(a[0]),rotation=45,color=cc,size=7,ha='center')
+            root.text(center_b,mt-.18,_(datum[other_col]),rotation=45,color=cc,size=7,ha='center')
             # connect syntenic lines
             root.plot([center_a,center_b],[mp-.06,mt+.06],'bo-',lw=1,mec='b',mew=1,mfc='w',ms=4)
             if a[0]==lc:

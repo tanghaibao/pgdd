@@ -1,4 +1,4 @@
-from preferences import *
+from preferences import * 
 
 def get_details(lc):
     return "<a href='/duplication/index/details?lc=%s' target='_blank'>%s</a>"%(lc,lc)
@@ -48,14 +48,14 @@ def show_seg(seg_id,lc,note,si,sc):
     for datum in block_results:
         if lc in datum:
             if datum[4]==lc:
-	        hit_col = 4
-	        other_lc = datum[5]
-	    else:
+                hit_col = 4
+                other_lc = datum[5]
+            else:
                 hit_col = 5
                 other_lc = datum[4]
                 note_sp1, note_sp2 = note.split('_')
                 note = note_sp2+'_'+note_sp1
-	    break
+	        break
     sql3 = """SELECT * from loci WHERE locus='%s'"""%(lc)
     sql4 = """SELECT * from loci WHERE locus='%s'"""%(other_lc)
     loci_results_a, loci_results_b = myconnect(sql3), myconnect(sql4)

@@ -1,9 +1,16 @@
-from preferences import *
+from preferences import * 
 import matplotlib.ticker as ticker
 
 # axis default
 origin, axis_len = 0.09, .89
 tpos = origin+axis_len/2
+
+def get_ctg_len(species):
+    sql = "select chromo, max_id from ctg_len where sp='%s'" % species
+    results = myconnect(sql)
+    results = sorted([(int(c[3:]), id) \
+            for (c, id) in results if c[-1]!="r"])
+    return [x[1] for x in results]
 
 def xformat(x, pos=None):
     return r"$%d$"%x
@@ -86,7 +93,8 @@ def dotplot1(req):
 
 def plot1(sql1, root, ax, canvas, fig, ks, species1,species2,ks_low,ks_high):
     # length list, label list, br is x-axis, at is y-axis
-    br_length, at_length = ctg_len[species1], ctg_len[species2]
+    #br_length, at_length = ctg_len[species1], ctg_len[species2]
+    br_length, at_length = get_ctg_len(species1), get_ctg_len(species2)
     brn, atn = len(br_length), len(at_length)
     br_chr, at_chr = [], []
     for i in xrange(brn): br_chr.append('C%d'%(i+1))
@@ -131,7 +139,8 @@ def plot1(sql1, root, ax, canvas, fig, ks, species1,species2,ks_low,ks_high):
     [tick.set_visible(False) for tick in ax.get_yticklines()]
 
     fa, fi = fig_terminate(root, canvas)
-    s = "<map id='mymap' name='mymap'>"
+    map_name = "map_%s_%s" % (species1, species2)
+    s = "<map name='%s'>" % map_name
     o = [640*origin,640*(1-origin)] # origin
     ax_l = 640*axis_len # ax length in px
     # map start_pos_tick list to coords value
@@ -142,15 +151,17 @@ def plot1(sql1, root, ax, canvas, fig, ks, species1,species2,ks_low,ks_high):
             alt_text = "Zoom in %s%d-%s%d"%(species1,j+1,species2,k+1)
             s+="<area shape='rect' href='javascript:talktoServer_block(%d,%d);' title='%s' coords='%i,%i,%i,%i' alt='%s'></area>"%(j+1,k+1,alt_text,p1,p2,p3,p4,alt_text)
     s += "</map>"
-    if ks: s+="%i pairs of anchor points plotted (ks filter: %.1f to %.1f), <font color='red'> click </font> on block to zoom in <br /><img class='articleimg' src='/duplication/usr/%s' usemap='#mymap' alt='' />"%(len(results),ks_low, ks_high, fi)
-    else: s+="%i pairs of anchor points plotted, <font color='red'> click </font> on block to zoom in <br /><img class='articleimg' src='/duplication/usr/%s' usemap='#mymap' alt='' /><br />"%(len(results),fi)
+    s += "%d pairs of anchors plotted " % len(results)
+    if ks: 
+        s += "(ks filter: %.1f to %.1f) " % (ks_low, ks_high)
+    s += "<font color='red'> click </font> on block to zoom in <br /><img class='articleimg' src='/duplication/usr/%s' usemap='#%s' alt='' /><br />" % (fi, map_name)
     img_location = "/duplication/scripts/to_pdf?imagename=%s" % fa
-    return s+"&nbsp;<img src='/duplication/images/icons/pdf.png' onclick=\"window.location.href='%s';\""\
-            "alt='Export to pdf' />" % img_location + print_button
+    return s + "&nbsp;<img src='/duplication/images/icons/pdf.png' onclick=\"window.location.href='%s';\" alt='Export to pdf' />" % img_location + print_button
 
 def plot2(sql1, root, ax, canvas, fig, chr1, chr2, ks, species1,species2,ks_low,ks_high):
     # length list, label list, br is x-axis, at is y-axis
-    br_length, at_length = ctg_len[species1], ctg_len[species2]
+    #br_length, at_length = ctg_len[species1], ctg_len[species2]
+    br_length, at_length = get_ctg_len(species1), get_ctg_len(species2)
     br_max, at_max = br_length[chr1-1], at_length[chr2-1]
     br_whole = [0,br_max]
     at_whole = [0,at_max]

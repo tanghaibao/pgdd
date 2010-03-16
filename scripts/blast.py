@@ -1,4 +1,4 @@
-from preferences import *
+from preferences import * 
 from numpy import arange
 from tempfile import mkstemp
 from operator import itemgetter
@@ -10,12 +10,20 @@ def link_wrap(lc):
     return "<a href=\"http://chibba.agtec.uga.edu/duplication/index/details?lc=%s\" target=\"_blank\">%s</a>" % \
             (lc.rsplit(".")[0], lc)
 
+def get_ctg_bp(species):
+    # not exactly the chromosome size, but the feature with largest end5
+    sql = "select chromo, max_bp from ctg_bp where sp='%s'" % species
+    results = myconnect(sql)
+    results = sorted([(int(c[3:]), id) \
+            for (c, id) in results if c[-1]!="r"])
+    return [x[1] for x in results]
+
 def plot_map(hits, sp):
     fig, canvas, root = fig_init([8,4])
     # species name
     root.text(.5,1.,sp_dict[sp],fontweight="bold",ha="center",va="top")
     # retrieve the lengths of chrs and estimate the gauge
-    chr_len = ctg_bp[sp]
+    chr_len = get_ctg_bp(sp)
     if not chr_len: return "<font color='red'>There are no pseudomolecules for %s data yet.</font>"%sp
     gauge = (max(chr_len)/10000000+1)*10 # in Mb
     mb = 7./gauge

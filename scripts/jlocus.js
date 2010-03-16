@@ -8,7 +8,7 @@ function example(locus){
 }
 function reset(){
 	$("#lc").val("");
-    $("#sc2").attr("checked","checked");;
+    $("#sc2").attr("checked","checked");
 	$("#display").html("");
 }
 

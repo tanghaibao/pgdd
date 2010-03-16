@@ -105,6 +105,7 @@ def blast1(req):
     for s in sp: 
         ss = s
         if s=="bd": ss="br"
+        elif s=="pt": ss="po"
         sp_hits[s] = [x for x in hits if x[1][:2].lower()==ss]
     page_rank = []
     for k,v in sp_hits.items():

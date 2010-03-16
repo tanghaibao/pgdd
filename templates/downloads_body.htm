@@ -1,6 +1,7 @@
+<script type="text/javascript" src="/duplication/scripts/jdownload.js"></script>
 <script type="text/javascript">
 //<![CDATA[
-function download() {
+function download_old() {
     var sp1 = $("#sp1").val();
     var sp2 = $("#sp2").val();
     if (sp1 && sp2){ 
@@ -11,7 +12,7 @@ function download() {
     }
 }
 function na(st){
-    $("#result").html("<div class='monotext'><font color='red'>"+st+"</font></div>");
+    $("#display").html("<font color='red'>"+st+"</font>");
 }
 //]]>
 </script>
@@ -47,10 +48,10 @@ function na(st){
 </tr></table>
 <br />
 <table><tr>
-<td><button onclick="javascript:download()">Download</button></td>
+<td><button onclick="javascript:talktoServer()">Download</button></td>
 <td><button onclick="javascript:window.location='/duplication/index/downloads';">Reset</button></td>
 </tr></table>
-<div id='result'></div>
+<div class="monotext" id="display"></div>
 <br />
 <h3>Developer's notes</h3>
 <p>

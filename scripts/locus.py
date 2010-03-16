@@ -14,7 +14,7 @@ def format_seq(seq, char_per_line=80):
     return s
 
 def locus1(req):
-    lc = cgi.escape(req.form.getfirst('lc')).strip().capitalize()
+    lc = cgi.escape(req.form.getfirst('lc')).strip().upper()
     try: sc = int(req.form.getfirst("sc"))
     except: sc = 100000
     if lc=="": return "<font color='red'>Please enter a non-empty ID.</font>"
@@ -94,11 +94,11 @@ def get_external(lc, sp):
     return external
 
 def details1(req, lc):
-    lc = lc.strip().capitalize()
+    lc = lc.strip().upper()
     sql1 = """SELECT * from loci WHERE locus='%s'"""%(lc)
     results = myconnect(sql1)
     if results==-1: return DB_FAIL_MSG
-    if len(results)==0: return "<font color='red'>We cannot find entries that contain %s.</font>"%lc
+    if len(results)==0: return "<font color='red'>We cannot find any record that contain %s.</font>"%lc
     # determine species
     prefix = lc[:2].lower()
     if prefix in sp_dict: sp = sp_dict[prefix]

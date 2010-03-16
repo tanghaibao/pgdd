@@ -119,7 +119,9 @@ def plot1(sql1, root, ax, canvas, fig, ks, species1,species2,ks_low,ks_high):
     START_POS_TICK_y = [0] + START_POS_y
     tickrange_x = get_tickrange(START_POS_TICK_x)
     tickrange_y = get_tickrange(START_POS_TICK_y)
-    ax.plot(x,y,'g.',alpha=.1)
+
+    ax.plot(x,y,'g.',alpha=.3,ms=.6)
+
     for i in xrange(1, brn): ax.plot([START_POS_x[i-1], START_POS_x[i-1]], at_whole, 'm-')
     for i in xrange(1, atn): ax.plot(br_whole, [START_POS_y[i-1], START_POS_y[i-1]], 'm-')
     ax.set_xticks(tickrange_x)
@@ -129,14 +131,16 @@ def plot1(sql1, root, ax, canvas, fig, ks, species1,species2,ks_low,ks_high):
     ax.set_yticklabels(listreverse(at_chr),color='b')
     if species1==species2: 
         ax.plot(br_whole,[at_whole[1],0],'r-')
-        ax.plot([br_max-_ for _ in y],[br_max-_ for _ in x],'.',color="gray",alpha=.1)
+        ax.plot([br_max-_ for _ in y],[br_max-_ for _ in x],
+                '.',color="gray",alpha=.3,ms=.6)
+
     ax.set_xlim(br_whole)
     ax.set_ylim(at_whole)
     # species name print
     root.text(.015,tpos,sp_dict[species2],fontweight="bold",ha="center",va="center",rotation=90)
     root.text(tpos,.015,sp_dict[species1],fontweight="bold",ha="center",va="center")
-    [tick.set_visible(False) for tick in ax.get_xticklines()]
-    [tick.set_visible(False) for tick in ax.get_yticklines()]
+    for t in ax.get_xticklines() + ax.get_yticklines():
+        t.set_visible(False)
 
     fa, fi = fig_terminate(root, canvas)
     map_name = "map_%s_%s" % (species1, species2)
@@ -177,8 +181,9 @@ def plot2(sql1, root, ax, canvas, fig, chr1, chr2, ks, species1,species2,ks_low,
         if chr1==chr2 and species1==species2 and xj+yj>0: xj,yj = -yj,-xj
         x.append(xj)
         y.append(yj)
-    # read cent_list
-    ax.plot(x,y,'g.')
+
+    ax.plot(x,y,'g.',alpha=.8,ms=1.6)
+
     if chr1==chr2 and species1==species2: 
         ax.plot(br_whole,[0,-at_max],'r-')
         ax.plot([-_ for _ in y],[-_ for _ in x],'.',color="gray")

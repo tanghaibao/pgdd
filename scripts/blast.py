@@ -56,10 +56,11 @@ def plot_map(hits, sp):
     
     # ticks for the genes
     for a, b, e, s in hits:
-        b = b.split(".")[0].capitalize()
+        b = b.split(".")[0].upper()
         sql1 = "SELECT chromo, end5 FROM loci WHERE locus='%s'"%b
         results = myconnect(sql1)
         if results==-1: return DB_FAIL_MSG
+        if len(results)==0: continue
         ch, pos = results[0]
         ch, pos = ch.replace("chr",""), to_mb(int(pos),mb)
         # 'Vv15r', 'ctg41' ...

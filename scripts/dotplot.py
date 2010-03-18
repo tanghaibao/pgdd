@@ -5,18 +5,20 @@ import matplotlib.ticker as ticker
 origin, axis_len = 0.09, .89
 tpos = origin+axis_len/2
 
-def get_ctg_len(species):
+def get_ctg_len(species, bp=0):
     sql = "select chromo, max_id from ctg_len where sp='%s'" % species
+    if bp:
+        sql = "select chromo, max_bp from ctg_bp where sp='%s'" % species
     results = myconnect(sql)
     results = sorted([(int(c[3:]), id) \
             for (c, id) in results if c[-1]!="r"])
     return [x[1] for x in results]
 
 def xformat(x, pos=None):
-    return r"$%d$"%x
+    return r"$%d$" % abs(x)
 
-def yformat(x, pos=None):
-    return r"$%d$"%-x
+def xformat_mb(x, pos=None):
+    return r"$%d\rm{M}$" % abs(x/1000000)
 
 def startpos(list):
     n = 0
@@ -24,12 +26,6 @@ def startpos(list):
     for num in list:
         n += num
         newlist.append(n)
-    return newlist
-
-def listreverse(list):
-    newlist = []
-    for index in xrange(len(list), 0, -1):
-        newlist.append (list[index-1])
     return newlist
 
 def de_pseudo(i, j, START_POS_x, START_POS_y, atn):
@@ -57,6 +53,8 @@ def dotplot1(req):
     except: chr_filter = 0
     try: ks_filter = int(req.form.getfirst('ks_filter'))
     except: ks_filter = 0
+    try: bp = int(req.form.getfirst('bp'))
+    except: bp = 0
     if chr_filter:
         chr1 = int(req.form.getfirst('chr1'))
         chr2 = int(req.form.getfirst('chr2'))
@@ -64,6 +62,8 @@ def dotplot1(req):
         species1,species2=species2,species1
         if (not block) and chr_filter: chr1,chr2=chr2,chr1
     sql1 = "SELECT block_no,chr_1,id_1,chr_2,id_2 from block WHERE note='%s_%s' AND chr_1 is not NULL AND chr_2 is not NULL"%(species1,species2)
+    if bp:
+        sql1 = "SELECT block_no,chr_1,end5_1,chr_2,end5_2 from block WHERE note='%s_%s' AND chr_1 is not NULL AND chr_2 is not NULL"%(species1,species2)
     results = myconnect(sql1)
     if results==-1: return DB_FAIL_MSG
     if len(results)==0: return "<font color='red'>Sorry, we are not able to visualize %s-%s data right now (perhaps one of the genome does not have pseudo-chromosomes)</font>"%(species1,species2)
@@ -88,13 +88,13 @@ def dotplot1(req):
 
     fig, canvas, root = fig_init([8,8])
     ax = fig.add_axes([origin, origin, axis_len, axis_len])
-    if chr_filter: return plot2(sql1,root,ax,canvas,fig,chr1,chr2,ks,species1,species2,ks_low,ks_high)
-    else: return plot1(sql1,root,ax,canvas,fig,ks,species1,species2,ks_low,ks_high)
+    if chr_filter: return plot2(sql1,root,ax,canvas,fig,chr1,chr2,ks,species1,species2,ks_low,ks_high,bp)
+    else: return plot1(sql1,root,ax,canvas,fig,ks,species1,species2,ks_low,ks_high,bp)
 
-def plot1(sql1, root, ax, canvas, fig, ks, species1,species2,ks_low,ks_high):
+def plot1(sql1, root, ax, canvas, fig, ks, species1,species2,ks_low,ks_high,bp):
     # length list, label list, br is x-axis, at is y-axis
     #br_length, at_length = ctg_len[species1], ctg_len[species2]
-    br_length, at_length = get_ctg_len(species1), get_ctg_len(species2)
+    br_length, at_length = get_ctg_len(species1, bp), get_ctg_len(species2, bp)
     brn, atn = len(br_length), len(at_length)
     br_chr, at_chr = [], []
     for i in xrange(brn): br_chr.append('C%d'%(i+1))
@@ -103,7 +103,7 @@ def plot1(sql1, root, ax, canvas, fig, ks, species1,species2,ks_low,ks_high):
     br_whole = [0,br_max]
     at_whole = [0,at_max]
     START_POS_x = startpos(br_length)
-    START_POS_y = startpos(listreverse(at_length))
+    START_POS_y = startpos(reversed(at_length))
     # pull the dataset
     x = [];y = []
     results = myconnect(sql1)
@@ -120,7 +120,7 @@ def plot1(sql1, root, ax, canvas, fig, ks, species1,species2,ks_low,ks_high):
     tickrange_x = get_tickrange(START_POS_TICK_x)
     tickrange_y = get_tickrange(START_POS_TICK_y)
 
-    ax.plot(x,y,'g.',alpha=.3,ms=.6)
+    ax.plot(x,y,'g.',alpha=.5,ms=1)
 
     for i in xrange(1, brn): ax.plot([START_POS_x[i-1], START_POS_x[i-1]], at_whole, 'm-')
     for i in xrange(1, atn): ax.plot(br_whole, [START_POS_y[i-1], START_POS_y[i-1]], 'm-')
@@ -128,11 +128,11 @@ def plot1(sql1, root, ax, canvas, fig, ks, species1,species2,ks_low,ks_high):
     ax.set_xticklabels(br_chr)
     setp(ax.get_xticklabels(),rotation=45,color='b')
     ax.set_yticks(tickrange_y)
-    ax.set_yticklabels(listreverse(at_chr),color='b')
+    ax.set_yticklabels(at_chr[::-1],color='b')
     if species1==species2: 
         ax.plot(br_whole,[at_whole[1],0],'r-')
         ax.plot([br_max-_ for _ in y],[br_max-_ for _ in x],
-                '.',color="gray",alpha=.3,ms=.6)
+                '.',color="gray",alpha=.5,ms=1)
 
     ax.set_xlim(br_whole)
     ax.set_ylim(at_whole)
@@ -162,10 +162,10 @@ def plot1(sql1, root, ax, canvas, fig, ks, species1,species2,ks_low,ks_high):
     img_location = "/duplication/scripts/to_pdf?imagename=%s" % fa
     return s + "&nbsp;<img src='/duplication/images/icons/pdf.png' onclick=\"window.location.href='%s';\" alt='Export to pdf' />" % img_location + print_button
 
-def plot2(sql1, root, ax, canvas, fig, chr1, chr2, ks, species1,species2,ks_low,ks_high):
+def plot2(sql1, root, ax, canvas, fig, chr1, chr2, ks, species1,species2,ks_low,ks_high,bp):
     # length list, label list, br is x-axis, at is y-axis
     #br_length, at_length = ctg_len[species1], ctg_len[species2]
-    br_length, at_length = get_ctg_len(species1), get_ctg_len(species2)
+    br_length, at_length = get_ctg_len(species1,bp), get_ctg_len(species2,bp)
     br_max, at_max = br_length[chr1-1], at_length[chr2-1]
     br_whole = [0,br_max]
     at_whole = [0,at_max]
@@ -182,14 +182,18 @@ def plot2(sql1, root, ax, canvas, fig, chr1, chr2, ks, species1,species2,ks_low,
         x.append(xj)
         y.append(yj)
 
-    ax.plot(x,y,'g.',alpha=.8,ms=1.6)
+    ax.plot(x,y,'g.',alpha=.9,ms=1.8)
 
     if chr1==chr2 and species1==species2: 
         ax.plot(br_whole,[0,-at_max],'r-')
-        ax.plot([-_ for _ in y],[-_ for _ in x],'.',color="gray")
+        ax.plot([-_ for _ in y],[-_ for _ in x],'.',color="gray",alpha=.9,ms=1.8)
+    
+    _xformat = xformat
+    if bp: _xformat = xformat_mb
+    
     # put the units onto the axis, pay attention to y-axis, as it is inverted
-    ax.xaxis.set_major_formatter(ticker.FuncFormatter(xformat))
-    ax.yaxis.set_major_formatter(ticker.FuncFormatter(yformat))
+    ax.xaxis.set_major_formatter(ticker.FuncFormatter(_xformat))
+    ax.yaxis.set_major_formatter(ticker.FuncFormatter(_xformat))
     ax.set_xlim(br_whole)
     ax.set_ylim([-ymax, 0])
     ax.grid(color="k",alpha=.2,ls=":")

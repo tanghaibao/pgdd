@@ -90,7 +90,8 @@ function add_chr(p){
     <td> and </td>
 	<td><input id="ks2" type="text" size="3" value="1.0" disabled="disabled" /></td>
     <td><i>(use view Ks button below to identify the range)</i></td>
-		</tr></table><table><tr>
+    </tr></table>
+    <table><tr>
     <td><input id="cb2" type="checkbox" value="1" onclick="chr_change()" /></td>
     <td> Display </td> <td id="sp1t"></td> <td>chromosome </td>
     <td><select id="chr1" disabled="disabled">
@@ -100,6 +101,11 @@ function add_chr(p){
     <td><select id="chr2" disabled="disabled">
     <option>1</option>
     </select></td>
+    </tr></table>
+    <table><tr>
+    <td><input id="bp" type="checkbox" /></td>
+    <td> Plot with base-pair distance </td>
+    <td> <i>(default: gene ranks)</i> </td>
     </tr></table>
     <br />
     <table><tr>

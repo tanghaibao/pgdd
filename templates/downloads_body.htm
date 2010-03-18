@@ -1,21 +1,4 @@
 <script type="text/javascript" src="/duplication/scripts/jdownload.js"></script>
-<script type="text/javascript">
-//<![CDATA[
-function download_old() {
-    var sp1 = $("#sp1").val();
-    var sp2 = $("#sp2").val();
-    if (sp1 && sp2){ 
-     if (sp1>sp2) {var temp=sp1; sp1=sp2; sp2=temp;}
-     na("Transferring data ... ");
-     window.location.href = '/duplication/data/'+sp1+'_'+sp2+'_block.zip';      }else{
-    na("Please select species from both lists.");
-    }
-}
-function na(st){
-    $("#display").html("<font color='red'>"+st+"</font>");
-}
-//]]>
-</script>
 <h1>Batch Downloads</h1>
 <p>You can download different datasets for the blocks listed in this database.
 </p>

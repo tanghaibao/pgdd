@@ -38,8 +38,8 @@ function add_chr(p){
   var sp2t = $("#sp1 option[value='"+sp2+"']").text().split("(")[0];
   $("#sp1t").html("<font color='green'>"+sp1t+"</font>");
   $("#sp2t").html("<font color='green'>"+sp2t+"</font>");
-  $("#ks_dist").attr("src", "/duplication/images/"+sp1+"_"+sp2+"_ks.png");
-  $("#ks_toggle").html("View "+sp1t+" - "+sp2t+" Ks distribution");
+  $("#ks_dist").attr("src", "/duplication/images/ks_img/"+sp1+"_"+sp2+"_ks.png");
+  $("#ks_toggle").html($("#ks_toggle").html().split(" ")[0]+" "+sp1t+" - "+sp2t+" Ks distribution");
  }
 }
 //]]>
@@ -89,7 +89,7 @@ function add_chr(p){
     <td><input id="ks1" type="text" size="3" value="0.5" disabled="disabled" /></td>
     <td> and </td>
 	<td><input id="ks2" type="text" size="3" value="1.0" disabled="disabled" /></td>
-    <td><i>(use view Ks button below to identify the range)</i></td>
+    <td><i>(use Ks button below to identify the range)</i></td>
     </tr></table>
     <table><tr>
     <td><input id="cb2" type="checkbox" value="1" onclick="chr_change()" /></td>
@@ -111,7 +111,7 @@ function add_chr(p){
     <table><tr>
 			<td><button onclick="javascript:talktoServer()">Dotplot</button></td>
 			<td><button onclick="javascript:window.location='/duplication/index/dotplot';">Reset</button></td>
-	<td><button id="ks_toggle">View Ks distribution</button></td>
+	<td><button id="ks_toggle">Open Ks distribution</button></td>
     </tr></table>
 <%-- Here is the query output for this page --%>
 <br />

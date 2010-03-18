@@ -66,7 +66,8 @@ def dotplot1(req):
         sql1 = "SELECT block_no,chr_1,end5_1,chr_2,end5_2 from block WHERE note='%s_%s' AND chr_1 is not NULL AND chr_2 is not NULL"%(species1,species2)
     results = myconnect(sql1)
     if results==-1: return DB_FAIL_MSG
-    if len(results)==0: return "<font color='red'>Sorry, we are not able to visualize %s-%s data right now (perhaps one of the genome does not have pseudo-chromosomes)</font>"%(species1,species2)
+    if len(results)==0 or "cp" in (species1, species2): 
+        return "<font color='red'>Sorry, we are not able to visualize %s-%s data right now (perhaps one of the genome does not have pseudo-chromosomes)</font>"%(species1,species2)
     if chr_filter or ks_filter: sql1+=" AND"
     # sql where clause conditions
     cond1, cond2 = "", ""
@@ -182,11 +183,11 @@ def plot2(sql1, root, ax, canvas, fig, chr1, chr2, ks, species1,species2,ks_low,
         x.append(xj)
         y.append(yj)
 
-    ax.plot(x,y,'g.',alpha=.9,ms=1.8)
+    ax.plot(x,y,'g.',ms=2)
 
     if chr1==chr2 and species1==species2: 
         ax.plot(br_whole,[0,-at_max],'r-')
-        ax.plot([-_ for _ in y],[-_ for _ in x],'.',color="gray",alpha=.9,ms=1.8)
+        ax.plot([-_ for _ in y],[-_ for _ in x],'.',color="gray",ms=2)
     
     _xformat = xformat
     if bp: _xformat = xformat_mb

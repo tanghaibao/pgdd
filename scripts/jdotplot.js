@@ -12,8 +12,18 @@ $(function (){
 });
 function talktoServer(){
   	var url = "/duplication/scripts/dotplot/dotplot1";
-
 	var params = "";
+    var sp1 = $("#sp1").val();
+    var sp2 = $("#sp2").val();
+    if (sp1 && sp2) {
+        if (sp1 > sp2) {
+            var temp=sp1; sp1=sp2; sp2=temp;
+        }
+    }
+    else {
+        $("#display").html("<font color='red'>Please select species from both list</font>");
+        return;
+    }
 
 	var cb1 = ($("#cb1").attr("checked"))?1:0;
 	var cb2 = ($("#cb2").attr("checked"))?1:0;

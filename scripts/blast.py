@@ -39,9 +39,9 @@ def plot_map(hits, sp):
             root.plot([xstart,xstart+tip],[ystart, ystart],"b-")
         else:
             root.plot([xstart-tip,xstart+tip],[ystart,ystart],"b-")
-            root.text(xstart+tip+.005,ystart,str(x),va="center")
+            root.text(xstart+tip+.005,ystart,r"$%d$"%x,va="center")
         ystart -= yincre
-    root.text(xstart+tip+.005,.15,"Mb",va="center")
+    root.text(xstart+tip+.005,.15,r"$\rm{Mb}$",va="center")
     # draw chromosomes
     chr_width = .015
     for i, l in enumerate(chr_len):

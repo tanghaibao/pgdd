@@ -2,8 +2,14 @@
 function talktoServer(){
     var sp1 = $("#sp1").val();
     var sp2 = $("#sp2").val();
-    if (sp1 && sp2 && sp1 > sp2) {
-        var temp=sp1; sp1=sp2; sp2=temp;
+    if (sp1 && sp2) {
+        if (sp1 > sp2) {
+            var temp=sp1; sp1=sp2; sp2=temp;
+        }
+    }
+    else {
+        $("#display").html("<font color='red'>Please select species from both list</font>");
+        return;
     }
 
   	var url = "/duplication/scripts/download";

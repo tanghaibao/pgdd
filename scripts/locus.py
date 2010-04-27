@@ -110,11 +110,11 @@ def details1(req, lc):
     <font color="red"> Annotation </font> : <font color="green">%s</font><br />
     %s
     <br /><font color="red"> PGDD synteny </font> : <a href="http://chibba.agtec.uga.edu/duplication/index/locus_app?lc=%s">%s</a>
-    <br /><br /><br />
-    <font color="red"> Protein </font>[<a href='/duplication/index/blast_app/?id=%s&amp;seq=%s'>Map View</a>] <br />%s<br />
+    <br /><br />
+    <font color="red"> Protein </font>[<a href='/duplication/index/blast_app/?id=%s&amp;seq=%s'>Map View</a>] <br />%s
     <br /><br />
     <font color="red"> DNA </font><br />%s
-    <br /><br /><br />
+    <br /><br />
     """
     for datum in results:
         s+=s1%(datum[1],datum[2],datum[3],datum[4],get_external(lc,sp),lc,lc,lc,\

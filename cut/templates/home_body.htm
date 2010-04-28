@@ -6,9 +6,9 @@ Treecut is an algorithm for identifying non-overlapping modular structures from 
 <h1>Try this demo</h1>
 <form id="myform" enctype="multipart/form-data" method="post" action="scripts/cut.py"> 
 Please upload your tree file in Newick format: <input type="file" id="treefn" name="treefn" /><br />
-<textarea id="tree" rows="8" cols="80"></textarea><br />
+<textarea id="tree" name="tree" rows="8" cols="80"></textarea><br />
 Please upload your list file that contains values for terminal nodes: <input type="file" id="listfn" name="listfn" /><br />
-<textarea id="list" rows="8" cols="80"></textarea><br />
+<textarea id="list" name="list" rows="8" cols="80"></textarea><br />
 <button type="submit">Run!</button>
 <button type="reset">Reset</button>
 <button onclick="javascript:example('((((1,2),3),(4,5)),(6,7));', 'accession,value\n1,50\n2,60\n3,90\n4,100\n5,10\n6,20\n7,30')">See an example</button><br /><br />

@@ -1,33 +1,34 @@
 
 function example(t1, t2){
-	$("#nwk").val(t1);
-	$("#csv").val(t2);
-}
-function reset(){
-	$("#nwk").val("");
-	$("#csv").val("");
-	$("#display").html("");
+	$("#tree").val(t1);
+	$("#list").val(t2);
 }
 
-function talktoServer(){
-  	var url = "/duplication/cut/scripts/cut.py";
-    var params = "";
-
-	var tags = new Array("nwk","csv");
-	for (var x=0; x<tags.length; x++)
-	{
-  		params += "&"+tags[x]+"="+escape($("#"+tags[x]).val());
-	}
-
-	$("#display").html("<img src='/duplication/images/loading.gif' />");
-    var query = url+"?"+params;
-	$.ajax({
-		url: url,
-		data: params,
-		success: function(msg){
-			$("#display").html(msg);
-		},
-        error: function(){
-            $("#display").html("<font color='red'>Error in XmlHttpRequest: <a href='"+query+"'>"+query+"</a></font>");                                                  }
-	});
+// prepare the form when the DOM is ready 
+$(function() { 
+    var options = { 
+        target:        '#display',   // target element(s) to be updated with server response 
+        beforeSubmit:  showRequest,  // pre-submit callback 
+        success: writeOutput
+    }; 
+ 
+    // bind form using 'ajaxForm' 
+    $('#myform').ajaxForm(options); 
+    $(':reset').click(function(){
+        $("#display").html("");
+    });
+}); 
+ 
+// pre-submit callback 
+function showRequest(formData, jqForm, options) {
+    $("#display").html("<img src='/duplication/images/loading.gif' />");
+    return true; 
+} 
+ 
+// post-submit callback 
+function showResponse(responseText, statusText)  { 
+}
+// success callback
+function writeOutput(data) {
+    $('#display').html(data);
 }

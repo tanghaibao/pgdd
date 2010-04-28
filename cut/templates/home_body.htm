@@ -1,20 +1,21 @@
+<script src="http://github.com/malsup/form/raw/master/jquery.form.js" type="text/javascript"></script> 
 <script type="text/javascript" src="/duplication/cut/scripts/jcut.js"></script>
 <p>
 Treecut is an algorithm for identifying non-overlapping modular structures from hierarchical clustering.
 </p>
 <h1>Try this demo</h1>
-Please upload your tree file in Newick format: <input type="file" id="treefn" name="treefn"></input><br />
-<textarea id="nwk" rows="3" cols="80"></textarea><br />
-Please upload your list file that contains values for terminal nodes: <input type="file" id="listfn" name="listfn"></input><br />
-<textarea id="csv" rows="3" cols="80"></textarea><br />
-<button onclick="javascript:talktoServer()">Run!</button>
-<button onclick="javascript:reset()">Reset</button>
+<form id="myform" enctype="multipart/form-data" method="post" action="scripts/cut.py"> 
+Please upload your tree file in Newick format: <input type="file" id="treefn" name="treefn" /><br />
+<textarea id="tree" rows="8" cols="80"></textarea><br />
+Please upload your list file that contains values for terminal nodes: <input type="file" id="listfn" name="listfn" /><br />
+<textarea id="list" rows="8" cols="80"></textarea><br />
+<button type="submit">Run!</button>
+<button type="reset">Reset</button>
 <button onclick="javascript:example('((((1,2),3),(4,5)),(6,7));', 'accession,value\n1,50\n2,60\n3,90\n4,100\n5,10\n6,20\n7,30')">See an example</button><br /><br />
+</form>
 <div class="monotext" id="display"></div>
+<br />
 <h1>Software availability</h1>
-<a href="">
-<img id="button" src="/duplication/cut/images/button.png" border="0" alt="" /></a>
-<br /><br />
 <p>
 <font color="red"><b>Current version hosted on <a href="http://github.com/tanghaibao/treecut">github repository</a></b></font><br />
 <code>$ git clone git@github.com:tanghaibao/treecut.git</code>
@@ -35,7 +36,7 @@ Results and procedures can be accessed <a href="/duplication/cut/index/results">
 </p><br />
 <h1>Reference</h1>
 <p>
-This software is represents a work in progress. Please use it and interpret the results with cautions.
+This software is represents a work in progress. Please interpret the results with cautions.
 </p><br />
 <h1>Contact</h1>
 <p>

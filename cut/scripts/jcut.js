@@ -31,6 +31,6 @@ function showResponse(responseText, statusText)  {
 // success callback
 function writeOutput(data) {
     data = data.replace(/<.*?>/g,'');  
-    $('#display').html(data);
-    $('#display').html("<object data='" + data + "' width='1000' height='1000' type='image/svg+xml' codebase='http://www.adobe.com/svg/viewer/install/' />");
+    $('#display').html("<img src='" + data + "' alt='' />");
+    //$('#display').html("<object data='" + data + "' width='1000' height='1000' type='image/svg+xml' codebase='http://www.adobe.com/svg/viewer/install/' />");
 }

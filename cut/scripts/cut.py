@@ -17,6 +17,7 @@ def write_to_file(str):
     if str:
         f = open(fname, "wb", 10000)
         f.write(str)
+	f.close()
     return fname
 
 
@@ -30,7 +31,7 @@ def index(req):
     if list_str:
         list_f = write_to_file(list_str)
 
-    out_f = write_to_file(None) + ".svg"
+    out_f = write_to_file(None) + ".png"
     cmd = "/usr/bin/python /var/www/duplication/apps/treecut/treecut.py %s %s %s" % (tree_f, list_f, out_f)
 
     #return "<font color='red'>red</font>"

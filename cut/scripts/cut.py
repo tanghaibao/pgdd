@@ -34,7 +34,6 @@ def index(req):
     out_f = write_to_file(None) + ".png"
     cmd = "/usr/bin/python /var/www/duplication/apps/treecut/treecut.py %s %s %s" % (tree_f, list_f, out_f)
 
-    #return "<font color='red'>red</font>"
     stdin, stdout, stderr = os.popen3(cmd)
     stdout_str, stderr_str = stdout.read(), stderr.read()
     #return "Cmd:%s\nOut:\n%s\nError:\n%s" % (cmd, stdout_str, stderr_str) 
@@ -43,5 +42,6 @@ def index(req):
     for f in (tree_f, list_f): 
         if op.exists(f): os.remove(f)
 
-    #return "<object data='%s' width='640' height='640' type='image/svg+xml' codebase='http://www.adobe.com/svg/viewer/install/' />" % (out_f.replace("/var/www", ""))
-    return out_f.replace("/var/www", "")
+    out_f = out_f.replace("/var/www", "")
+    return out_f
+

@@ -19,7 +19,7 @@ body {
 	font-family:Helvetica,Verdana,Arial;
 	font-size:.9em;
 	color:#555555;
-	background-color:#FFFFFF;
+    background:#f8f8f8;
 	text-align:left;
 }
 textarea {
@@ -227,7 +227,10 @@ li {
 }
 #mainbar .articleimg {
 	padding:5px;
-	border:1px solid #eeeeee;
+    background:#CCC;
+    border-radius:3px;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
 	margin-bottom:20px;
 	margin-right:20px;
 }

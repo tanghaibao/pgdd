@@ -1,8 +1,3 @@
-<link rel="stylesheet" href="http://dev.jquery.com/view/trunk/plugins/autocomplete/jquery.autocomplete.css" type="text/css" />
-<script type="text/javascript" src="http://dev.jquery.com/view/trunk/plugins/autocomplete/lib/jquery.bgiframe.min.js"></script>
-<script type="text/javascript" src="http://dev.jquery.com/view/trunk/plugins/autocomplete/lib/jquery.dimensions.js"></script>
-<script type="text/javascript" src="http://dev.jquery.com/view/trunk/plugins/autocomplete/jquery.autocomplete.js"></script>
-
 <script type="text/javascript" src="/duplication/scripts/jlocus.js"></script>
 <h1>Locus Search</h1>
 <p>Obtain a report of related syntenic regions in multiple species by locus identifier<br />You can choose e.g.  
@@ -12,14 +7,12 @@
 <a href="javascript:example('POPTR_0003s11240');">POPTR_0003s11240</a>, 
 <a href="javascript:example('Zm2g000039');">Zm2g000039</a> 
 </p>
-<table>
-<tr>
-<td><b>Locus identifier </b></td>
-<td><input type="text" id="lc" name="lc" size="30" /></td>
-<td><button onclick="talktoServer();">Submit</button></td>
-<td><button onclick="reset();">Reset</button></td>
-</tr>
-</table>
+<div class="ui-widget">
+    <label for="lc">Locus identifier: </label>
+    <input id="lc" name="lc" size="30" />
+    <button onclick="talktoServer();">Submit</button>
+    <button onclick="reset();">Reset</button>
+</div>
 <table>
 <tr>
     <td><b>Display region</b></td>

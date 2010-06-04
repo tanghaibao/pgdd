@@ -1,13 +1,7 @@
 $(function (){
+    $("#ks_toggle").button();    
 	$("#ks_toggle").click(function(){
 		$("#ks_dist").slideToggle("slow");
-        var button_txt = $("#ks_toggle").html();
-        if (button_txt.charAt(0)=='O') {
-            $("#ks_toggle").html(button_txt.replace("Open", "Close"));
-        }
-        else {
-            $("#ks_toggle").html(button_txt.replace("Close", "Open"));
-        }
 	});
 });
 function talktoServer(){

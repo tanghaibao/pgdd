@@ -39,7 +39,6 @@ function add_chr(p){
   $("#sp1t").html("<font color='green'>"+sp1t+"</font>");
   $("#sp2t").html("<font color='green'>"+sp2t+"</font>");
   $("#ks_dist").attr("src", "/duplication/images/ks_img/"+sp1+"_"+sp2+"_ks.png");
-  $("#ks_toggle").html($("#ks_toggle").html().split(" ")[0]+" "+sp1t+" - "+sp2t+" Ks distribution");
  }
 }
 //]]>
@@ -108,11 +107,9 @@ function add_chr(p){
     <td> <i>(default: gene ranks)</i> </td>
     </tr></table>
     <br />
-    <table><tr>
-			<td><button onclick="javascript:talktoServer()">Dotplot</button></td>
-			<td><button onclick="javascript:window.location='/duplication/index/dotplot';">Reset</button></td>
-	<td><button id="ks_toggle">Open Ks distribution</button></td>
-    </tr></table>
+    <button onclick="javascript:talktoServer()">Dotplot</button>
+    <button onclick="javascript:window.location='/duplication/index/dotplot';">Reset</button>
+    <input type="checkbox" id="ks_toggle" /><label for="ks_toggle">Ks distribution</label>
 <%-- Here is the query output for this page --%>
 <br />
 <img style="display: none" src="" class="articleimg" id="ks_dist" alt="" />

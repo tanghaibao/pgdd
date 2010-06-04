@@ -1,6 +1,7 @@
 
 function example(seq){
 	$("#seq").val(seq);
+    talktoServer();
 }
 function reset(){
 	$("#seq").val("");

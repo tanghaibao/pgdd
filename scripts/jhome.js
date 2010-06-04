@@ -1,3 +1,7 @@
+$(function () {
+        var icons = {header: "ui-icon-circle-arrow-e", headerSelected:"ui-icon-circle-arrow-s"};
+        $("#methods").accordion({icons: icons});
+        });
 function factdivdiv( n, k1, k2 ) {
    // computes (n! / k1! k2!) for combinations
    // assure k1 >= k2
@@ -30,6 +34,7 @@ function ex()
     $("#N").val("30000");
     $("#J1").val("5");
     $("#J2").val("5");
+    calc();
 }
 function calc()
 {

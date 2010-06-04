@@ -1,5 +1,5 @@
 $(function(){
-    $("#lc").autocomplete("/duplication/scripts/autocomplete");
+    $("#lc").autocomplete({source: "/duplication/scripts/autocomplete"});
 });
 
 function example(locus){

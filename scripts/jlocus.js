@@ -1,5 +1,6 @@
 $(function(){
     $("#lc").autocomplete({source: "/duplication/scripts/autocomplete"});
+    $("#radio").buttonset();
 });
 
 function example(locus){

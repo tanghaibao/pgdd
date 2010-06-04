@@ -172,19 +172,19 @@ PGDD is a public database to identify and catalog plant genes in terms of intrag
 <br />
 <h1>Methods</h1>
 <div id="methods">
-    <h3><a href="#">Identify syntenic blocks</a></h3>
+    <h3><a href="#"> Identify syntenic blocks</a></h3>
     <div>
         <p>
 We used BLASTP to search for potential anchors (<i>E</i> &lt;1e-5, top 5 matches) between every possible pair of chromosomes in multiple genomes. The homologous pairs are used as the input for <a href="/duplication/mcscan">MCscan</a>. MCscan is a novel synteny search program that combines the merits of two existent algorithms. The built-in scoring scheme for MCscan is <i>min</i> {-log<sub>10</sub><i>E</i>, 50} for every matching gene pairs and -1 for each 10kb distance between anchors, similar to <a href="http://dagchainer.sourceforge.net/">DAGchainer</a> and blocks that have scores &gt;300 were kept. The resulting syntenic chains are evaluated using a procedure in <a href="http://colinear.cbi.pku.edu.cn/">ColinearScan</a> and <i>E</i>-value &lt;1e-10 were used as a significance cutoff.
         </p>
     </div>
-    <h3><a href="#">Calculate synonymous substitutions (Ks)</a></h3>
+    <h3><a href="#"> Calculate synonymous substitutions (Ks)</a></h3>
     <div>
         <p>
 For homologs inferred from syntenic alignments, we aligned the protein sequences of the gene pairs using <a href="http://www.ebi.ac.uk/Tools/clustalw2/index.html">CLUSTALW</a> and used the protein alignments to guide CDS alignments by <a href="http://coot.embl.de/pal2nal/">PAL2NAL</a>. Finally, we used Nei-Gojobori method implemented in the <a href="http://abacus.gene.ucl.ac.uk/software/paml.html">PAML</a> package to calculate Ks. An in-house <a href="/duplication/data/syn_calc.zip">python script</a> is used to pipeline all the calculations. Log-gaussian mixture models are fitted to the Ks distributions using <a href="http://astro.u-strasbg.fr/~fmurtagh/mda-sw/">GMM with Bayes Factors</a>.
         </p>
     </div>
-    <h3><a href="#">How can I calculate the significance of segmental duplication</a></h3>
+    <h3><a href="#"> How can I calculate the significance of segmental duplication</a></h3>
     <div>
         <p>
 Number of collinear genes: <input type="text" size="5" id="K" />

@@ -12,16 +12,13 @@
     <input id="lc" name="lc" size="30" />
     <button onclick="talktoServer();">Submit</button>
     <button onclick="reset();">Reset</button>
+    <div id="radio">
+        <input type="radio" name="sc" id="sc1" value="50000" /><label for="sc1">50kb</label>
+        <input type="radio" checked="checked" name="sc" id="sc2" value="100000" /><label for="sc2">100kb</label>
+        <input type="radio" name="sc" id="sc3" value="200000" /><label for="sc3">200kb</label>
+        <input type="radio" name="sc" id="sc4" value="500000" /><label for="sc4">500kb</label>
+    </div>
 </div>
-<table>
-<tr>
-    <td><b>Display region</b></td>
-    <td><input type="radio" name="sc" id="sc1" value="50000" />50kb </td>
-    <td><input type="radio" checked="checked" name="sc" id="sc2" value="100000" />100kb </td>
-    <td><input type="radio" name="sc" id="sc3" value="200000" />200kb </td>
-    <td><input type="radio" name="sc" id="sc4" value="500000" />500kb </td>
-</tr>
-</table>
 <%-- Here is the query output for this page --%>
 <br />
 <div class="monotext" id="display"></div>

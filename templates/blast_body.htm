@@ -5,31 +5,18 @@ The program did BLAST search and visualize the hits, then try to look for region
 </p>
 <button onclick="example('>Os02g0504900\nMLTLVGTRDSFAQSQAQLCAGMQLKAPTRAKYSQGFMPIGESDAYCALIPGLPEDLAKICLALVPRSQFPVMGSVSKRWMSFLESKEFIAVRKEVGKLEEWVYVLTADAGSKGSHWEVLGCSGQKHSPLPPMPGPTKAGFGVVVLDGKLFVIAGYAADHGKECVSDEVYRYDSCLNRWVELSKMNVARCDFACAEVNGMIYVAGGFGPNGDSLSSVEVYDAEQNKWTLIESLRRPRWGCFACSFEGKLYVMGGRSRFTIGNTRFVDVYNPNDNSWGEVKNGCVMVTAHAVLDKKLFCIEWKNQRSLAVFNPADNSWQKVPVPLTGSSSTRFCFGIHDGKLLLFSLDEEPCYKTLMYDPAAPTGSEWFTSELKPPGLCLCSVTIRA*');">Try this sequence</button><br />
 <textarea id="seq" rows="8" cols="80"></textarea>
-<table>
-    <tr>
-    <td><i>E</i>-value cutoff : </td>
-    <td><input type="text" size="5" value="1e-10" id="evalue" /></td>
-    <td> Low complexity filter : </td>
-    <td> On </td>
-    <td><input type="radio" value="T" name="filter" id="filter" checked="checked" /></td>
-    <td> Off </td>
-    <td><input type="radio" value="F" name="filter" id="filter" /></td>
-    </tr>
-</table>
-<table>
-    <tr>
-    <td> Sequence type : </td>
-    <td><select id="program" >
-        <option value="blastp" selected="selected">Protein sequences : use BLASTP</option>
-        <option value="blastx">Nucleotide sequences : use BLASTX</option>
-    </select></td>
-    </tr>
-</table>
-<table>
-    <tr>
-    <td><button onclick="talktoServer();">Map View</button></td>
-    <td><button onclick="reset();">Reset</button></td>
-    </tr>
-</table>
+<br />
+ <i>E</i>-value cutoff :
+<input type="text" size="5" value="1e-10" id="evalue" />
+<input type="checkbox" id="filter" checked="checked" /><label for="filter"> Low complexity filter </label>
+<br />
+<br />
+<div id="algo">
+    <input type="radio" name="program" id="p1" value="blastp" checked="checked" /><label for="p1">Protein sequences : use BLASTP</label>
+    <input type="radio" name="program" id="p2" value="blastx" /><label for="p2">Nucleotide sequences : use BLASTX</label>
+</div>
+<br />
+<button onclick="talktoServer();">Map View</button>
+<button onclick="reset();">Reset</button>
 <br />
 <div class="monotext" id="display"></div>

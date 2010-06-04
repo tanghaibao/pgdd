@@ -1,3 +1,7 @@
+$(function() {
+    $("#filter").button();    
+    $("#algo").buttonset();    
+});
 
 function example(seq){
 	$("#seq").val(seq);
@@ -12,11 +16,13 @@ function talktoServer(){
   	var url = "/duplication/scripts/blast/blast1";
     var params = "";
 
-	var tags = new Array("seq","filter","evalue","program");
+	var tags = new Array("seq", "evalue");
 	for (var x=0; x<tags.length; x++)
 	{
   		params += "&"+tags[x]+"="+escape($("#"+tags[x]).val());
 	}
+    params += "&filter=" + (($("#filter").attr("checked"))?1:0);
+    params += "&program=" + escape($("input[name=program]:checked").val());
 
 	$("#display").html("<img src='/duplication/images/loading.gif' />");
     var query = url+"?"+params;

@@ -84,11 +84,8 @@ ul {
     margin: 0;
     padding: 0;
 }
-li {
-	list-style-image:url(../images/backgrounds/li.gif);
-	line-height:20px;
-	text-align:left;
-}
+
+li {line-height:20px;}
 
 #menu {
 	width:100%;

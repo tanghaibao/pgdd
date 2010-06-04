@@ -1,0 +1,43 @@
+<h1>Plant Dataset</h1>
+<h3>Protein sequences (FASTA format)</h3>
+    <li><a href="/duplication/mcscan/data/at"><i>Arabidopsis</i></a></li>
+    <li><a href="/duplication/mcscan/data/pa"><i>Carica</i></a></li>
+    <li><a href="/duplication/mcscan/data/po"><i>Populus</i></a></li>
+    <li><a href="/duplication/mcscan/data/mt"><i>Medicago</i></a></li>
+    <li><a href="/duplication/mcscan/data/gm"><i>Glycine</i></a></li>
+    <li><a href="/duplication/mcscan/data/vv"><i>Vitis</i></a></li>
+    <li><a href="/duplication/mcscan/data/bd"><i>Brachypodium</i></a></li>
+    <li><a href="/duplication/mcscan/data/oy"><i>Oryza</i></a></li>
+    <li><a href="/duplication/mcscan/data/sb"><i>Sorghum</i></a></li>
+    <li><a href="/duplication/mcscan/data/zm"><i>Zea</i></a></li>
+<h3>Coding sequences (FASTA format)</h3>
+    <li><a href="/duplication/mcscan/data/at.cds"><i>Arabidopsis</i></a></li>
+    <li><a href="/duplication/mcscan/data/cp.cds"><i>Carica</i></a></li>
+    <li><a href="/duplication/mcscan/data/pt.cds"><i>Populus</i></a></li>
+    <li><a href="/duplication/mcscan/data/mt.cds"><i>Medicago</i></a></li>
+    <li><a href="/duplication/mcscan/data/gl.cds"><i>Glycine</i></a></li>
+    <li><a href="/duplication/mcscan/data/vv.cds"><i>Vitis</i></a></li>
+    <li><a href="/duplication/mcscan/data/bd.cds"><i>Brachypodium</i></a></li>
+    <li><a href="/duplication/mcscan/data/os.cds"><i>Oryza</i></a></li>
+    <li><a href="/duplication/mcscan/data/sb.cds"><i>Sorghum</i></a></li>
+    <li><a href="/duplication/mcscan/data/zm.cds"><i>Zea</i></a></li>
+<h3>Positions on the scaffolds (Scaffold, gene, start, stop)</h3>
+    <li><a href="/duplication/mcscan/data/at.gff"><i>Arabidopsis</i></a></li>
+    <li><a href="/duplication/mcscan/data/cp.gff"><i>Carica</i></a></li>
+    <li><a href="/duplication/mcscan/data/pt.gff"><i>Populus</i></a></li>
+    <li><a href="/duplication/mcscan/data/mt.gff"><i>Medicago</i></a></li>
+    <li><a href="/duplication/mcscan/data/gl.gff"><i>Glycine</i></a></li>
+    <li><a href="/duplication/mcscan/data/vv.gff"><i>Vitis</i></a></li>
+    <li><a href="/duplication/mcscan/data/bd.gff"><i>Brachypodium</i></a></li>
+    <li><a href="/duplication/mcscan/data/os.gff"><i>Oryza</i></a></li>
+    <li><a href="/duplication/mcscan/data/sb.gff"><i>Sorghum</i></a></li>
+    <li><a href="/duplication/mcscan/data/zm.gff"><i>Zea</i></a></li>
+<p>* These dataset represent processed annotations for various plant genomes (see <a href="/duplication">"Data Source" table</a>). Gene names for <i>Carica</i> and <i>Vitis</i> do not follow their release names, the ID conversion table is <a href="/duplication/mcscan/data/ID_conversion.txt">here</a>.</p>
+<br /><hr /><br />
+<h1>Pre-calculated syntenic gene sets</h1>
+<h3><font color="red">Post-hexaploidy rosid groups (list of syntenic genes)</font></h3>
+<p><a href="/duplication/mcscan/data/rosid_groups.txt">Syntenic groups of genes</a> from athaliana, grape, papaya and poplar. This will contain athaliana duplicates (from "alpha" and "beta") and poplar duplicates. Gene families are constructed through synteny. Tandem genes (BLASTP evalue <1e-10 within 10 genes) are merged before construction.</p>
+<h3><font color="red">Pre-tetraploidy grass groups (list of syntenic genes)</font></h3>
+<p><a href="/duplication/mcscan/data/grass_groups.txt">Syntenic groups of genes</a> from brachy, maize, rice and sorghum. This will contain pan-grass WGD duplicates and maize-specific duplicates. Gene families are constructed through synteny. Tandem genes (BLASTP evalue <1e-10 within 10 genes) are merged before construction.</p>
+<h3><font color="gray">Pre-hexaploidy rosid groups (ClusterID, list of syntenic genes)</font></h3>
+<p><a href="/duplication/mcscan/data/gamma_groups.txt">Syntenic groups of genes</a> from athaliana, grape, papaya and poplar, but before hexaploidy (called "gamma" event). The gene groups are clustered not solely by sequence similarities, but also based on synteny determined by MCscan. This is supplementary data of Tang et al. Genome Research, 2008. The names are non-standard but can be converted (see above).</p>

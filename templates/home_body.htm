@@ -5,7 +5,7 @@ PGDD is a public database to identify and catalog plant genes in terms of intrag
 <h1>Data sources</h1>
 <table class="sofT" cellspacing="0">
 <tr class="helpHed">
-	<td colspan="7">Plant genomes in this database (10 genomes)</td>
+	<td colspan="7">Plant genomes in this database (11 genomes)</td>
 </tr>
 <tr class="helpHed">
 	<td colspan="2">Species name</td>
@@ -32,6 +32,15 @@ PGDD is a public database to identify and catalog plant genes in terms of intrag
         <td>25536</td>
         <td><a href="http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?db=nucleotide&amp;val=186167268">Genbank</a>, <a href="ftp://asgpb.mhpcc.hawaii.edu/papaya/">Hawaii</a></td>
         <td><a href="http://www.nature.com/nature/journal/v452/n7190/abs/nature06856.html"><i>Nature</i></a></td>
+</tr>
+<tr>
+    <td><img src="/duplication/images/icons/ppa.gif" width="25" height="25" alt="" /></td>
+    <td><a href="http://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=3760"><i>Prunus persica *</i></a></td>
+        <td>peach</td>
+        <td>Release (Apr 2010)</td>
+        <td>28689</td>
+        <td><a href="ftp://ftp.jgi-psf.org/pub/JGI_data/phytozome/v5.0/Ppersica">JGI</a></td>
+        <td>--</td>
 </tr>
 <tr>
     <td><img src="/duplication/images/icons/pt.gif" width="25" height="25" alt="" /></td>
@@ -106,7 +115,7 @@ PGDD is a public database to identify and catalog plant genes in terms of intrag
         <td><a href="http://www.sciencemag.org/cgi/content/full/326/5956/1112"><i>Science</i></a></td>
 </tr>
 
-    <tr class="helpHed"><td colspan="7">In queue (6 genomes)</td></tr>
+    <tr class="helpHed"><td colspan="7">In queue (5 genomes)</td></tr>
 <tr>
     <td><img src="/duplication/images/icons/al.png" width="25" height="25" alt="" /></td>
     <td><a href="http://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=59689"><i>Arabidopsis lyrata *</i></a></td>
@@ -124,15 +133,6 @@ PGDD is a public database to identify and catalog plant genes in terms of intrag
         <td>--</td>
         <td><a href="ftp://cucumber.genomics.org.cn/pub/cucumber/">BGI</a></td>
         <td><a href="http://www.nature.com/ng/journal/vaop/ncurrent/abs/ng.475.html"><i>Nature Genetics</i></a></td>
-</tr>
-<tr>
-    <td><img src="/duplication/images/icons/ppa.gif" width="25" height="25" alt="" /></td>
-    <td><a href="http://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=3760"><i>Prunus persica *</i></a></td>
-        <td>peach</td>
-        <td>Release (Apr 2010)</td>
-        <td>--</td>
-        <td><a href="ftp://ftp.jgi-psf.org/pub/JGI_data/phytozome/v5.0/Ppersica">JGI</a></td>
-        <td>--</td>
 </tr>
 <tr>
     <td><img src="/duplication/images/icons/rc.gif" width="25" height="25" alt="" /></td>
@@ -183,7 +183,7 @@ We used BLASTP to search for potential anchors (<i>E</i> &lt;1e-5, top 5 matches
     <h3><a href="#"> Calculate synonymous substitutions (Ks)</a></h3>
     <div>
         <p>
-For homologs inferred from syntenic alignments, we aligned the protein sequences of the gene pairs using <a href="http://www.ebi.ac.uk/Tools/clustalw2/index.html">CLUSTALW</a> and used the protein alignments to guide CDS alignments by <a href="http://coot.embl.de/pal2nal/">PAL2NAL</a>. Finally, we used Nei-Gojobori method implemented in the <a href="http://abacus.gene.ucl.ac.uk/software/paml.html">PAML</a> package to calculate Ks. An in-house <a href="/duplication/data/syn_calc.zip">python script</a> is used to pipeline all the calculations. Log-gaussian mixture models are fitted to the Ks distributions using <a href="http://astro.u-strasbg.fr/~fmurtagh/mda-sw/">GMM with Bayes Factors</a>.
+For homologs inferred from syntenic alignments, we aligned the protein sequences of the gene pairs using <a href="http://www.ebi.ac.uk/Tools/clustalw2/index.html">CLUSTALW</a> and used the protein alignments to guide CDS alignments by <a href="http://coot.embl.de/pal2nal/">PAL2NAL</a>. Finally, we used Nei-Gojobori method implemented in the <a href="http://abacus.gene.ucl.ac.uk/software/paml.html">PAML</a> package to calculate Ks. An in-house <a target="_blank" href="http://github.com/tanghaibao/bio-pipeline/blob/master/synonymous_calculation/synonymous_calc.py">python script</a> is used to pipeline all the calculations. Log-gaussian mixture models are fitted to the Ks distributions using <a href="http://astro.u-strasbg.fr/~fmurtagh/mda-sw/">GMM with Bayes Factors</a>.
         </p>
     </div>
     <h3><a href="#"> How can I calculate the significance of segmental duplication</a></h3>

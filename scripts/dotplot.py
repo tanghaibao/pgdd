@@ -5,15 +5,6 @@ import matplotlib.ticker as ticker
 origin, axis_len = 0.09, .89
 tpos = origin+axis_len/2
 
-def get_ctg_len(species, bp=0):
-    sql = "select chromo, max_id from ctg_len where sp='%s'" % species
-    if bp:
-        sql = "select chromo, max_bp from ctg_bp where sp='%s'" % species
-    results = myconnect(sql)
-    results = sorted([(int(c[3:]), id) \
-            for (c, id) in results if c[-1]!="r"])
-    return [x[1] for x in results]
-
 def xformat(x, pos=None):
     return r"$%d$" % abs(x)
 
@@ -30,9 +21,13 @@ def startpos(list):
 
 def de_pseudo(i, j, START_POS_x, START_POS_y, atn):
     pseudo_starteri, pseudo_starterj = 0, 0
-    if i == 1: pseudo_starteri = 0
-    else: pseudo_starteri = START_POS_x[i-2]
-    pseudo_starterj = START_POS_y[atn-j]
+    try:
+        if i == 1: pseudo_starteri = 0
+        else: pseudo_starteri = START_POS_x[i-2]
+        pseudo_starterj = START_POS_y[atn-j]
+    except:
+        pass
+    #assert False, "\t".join(str(x) for x in (i,j,START_POS_x,START_POS_y,atn))
     return pseudo_starteri, pseudo_starterj
 
 def get_tickrange(pre):

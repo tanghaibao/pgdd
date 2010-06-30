@@ -19,7 +19,7 @@ function chr_change(){
  }
 function add_chr(p){
  var mylistindex = document.getElementById("sp"+p).selectedIndex;
- var chr_numbers = new Array(5, 9, 19, 8, 20, 19, 5, 12, 10,10);
+ var chr_numbers = new Array(5, 9, 8, 19, 8, 20, 19, 5, 12, 10,10);
  var k = chr_numbers[mylistindex];
  var x = document.getElementById("chr"+p)
  for (j=0;j<=20;j++){
@@ -45,10 +45,11 @@ function add_chr(p){
 </script>
 <h1>Visualizing Syntenic Blocks</h1>
         <table><tr><td>
-    <select size="12" id="sp1" onchange="add_chr('1')">
+    <select size="13" id="sp1" onchange="add_chr('1')">
     <optgroup label="Eudicots">
     <option value="at">A. thaliana (thale cress)</option>
     <option value="cp">C. papaya (papaya)</option>
+    <option value="pp">P. prunus (peach) *</option>
 	<option value="pt">P. trichocarpa (poplar)</option>
     <option value="mt">M. trunculata (barrel medic) *</option>
     <option value="gl">G. max (soybean)</option>
@@ -63,10 +64,11 @@ function add_chr(p){
 	</select></td>
     <td><img src="/duplication/images/icons/versus.gif" alt="" /></td>
     <td>
-    <select size="12" id="sp2" onchange="add_chr('2')">
+    <select size="13" id="sp2" onchange="add_chr('2')">
     <optgroup label="Eudicots">
     <option value="at">A. thaliana (thale cress)</option>
     <option value="cp">C. papaya (papaya)</option>
+    <option value="pp">P. prunus (peach) *</option>
 	<option value="pt">P. trichocarpa (poplar)</option>
     <option value="mt">M. trunculata (barrel medic) *</option>
     <option value="gl">G. max (soybean)</option>

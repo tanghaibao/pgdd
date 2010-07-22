@@ -1,5 +1,6 @@
 import os
 import os.path as op
+import json
 from random import randint
 
 
@@ -20,28 +21,36 @@ def write_to_file(str):
 	f.close()
     return fname
 
+# wrap the linux line feed and then convert to breaks
+line_feed = lambda stream: stream.readlines()
 
 def index(req):
 
-    tree_str = req.form['tree']
-    list_str = req.form['list']
+    tree_str = req.form.get('tree', '')
+    list_str = req.form.get('list', '')
+    pvalue = req.form.get('pvalue', ".01")
 
     if tree_str:
         tree_f = write_to_file(tree_str) 
     if list_str:
         list_f = write_to_file(list_str)
 
+
     out_f = write_to_file(None) + ".png"
-    cmd = "/usr/bin/python /var/www/duplication/apps/treecut/treecut.py %s %s %s" % (tree_f, list_f, out_f)
+    cmd = "MPLCONFIGDIR=/var/www/duplication/usr/ /usr/bin/python " + \
+            "-W ignore::DeprecationWarning " + \
+            "/var/www/duplication/apps/treecut/treecut.py " + \
+            "--cutoff %s %s %s %s" % (pvalue, tree_f, list_f, out_f)
 
     stdin, stdout, stderr = os.popen3(cmd)
-    stdout_str, stderr_str = stdout.read(), stderr.read()
-    #return "Cmd:%s\nOut:\n%s\nError:\n%s" % (cmd, stdout_str, stderr_str) 
+    stdout_str, stderr_str = line_feed(stdout), line_feed(stderr)
 
     # cleanup
     for f in (tree_f, list_f): 
         if op.exists(f): os.remove(f)
 
     out_f = out_f.replace("/var/www", "")
-    return out_f
+    json_out = dict(out_f=out_f, cmd=cmd, stdout_str=stdout_str, stderr_str=stderr_str)
+
+    return json.dumps(json_out)
 

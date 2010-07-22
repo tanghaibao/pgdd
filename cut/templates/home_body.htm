@@ -9,9 +9,13 @@ Please upload your tree file in Newick format: <input type="file" id="treefn" na
 <textarea id="tree" name="tree" rows="8" cols="80"></textarea><br />
 Please upload your list file that contains values for terminal nodes: <input type="file" id="listfn" name="listfn" /><br />
 <textarea id="list" name="list" rows="8" cols="80"></textarea><br />
+<label for="pvalue">P-value cutoff</label><input id="pvalue" name="pvalue" type="text" size="5" value="0.01"/>
+<label for="discrete">Discrete type</label><input id="discrete" name="discrete" type="checkbox" />
+<span id="tinfo" style="color: green">treat values as continuous; use t-test for significance testing</span>
+<br />
 <button type="submit">Run</button>
 <button type="reset">Reset</button>
-<button onclick="javascript:example('(((1,2),(3,4)),((5,((6,7),8)),(9,(10,11))));', 'accession,value\n1,20\n2,25\n3,19\n4,10\n5,70\n6,60\n7,53\n8,77\n9,53\n10,90\n11,54')">See an example</button><br /><br />
+<button onclick="example('(((1,2),(3,4)),((5,((6,7),8)),(9,(10,11))));', '#accession,value\n1,20\n2,25\n3,19\n4,10\n5,70\n6,60\n7,53\n8,77\n9,53\n10,90\n11,54')">See an example</button><br /><br />
 </form>
 <div class="monotext" id="display"></div>
 <br />
@@ -41,7 +45,7 @@ This software is represents a work in progress. Please interpret the results wit
 <h1>Contact</h1>
 <p>
 All bug reports, suggestions or questions are very welcome and should be dumped to <br /> 
-<div class="ui-icon ui-icon-person"></div>
+<span class="ui-icon ui-icon-person"></span>
 <font color="green">Haibao Tang</font> : bao at uga dot edu
 </p>
 <br />

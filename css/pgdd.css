@@ -1,15 +1,6 @@
-/* CSS Document Adapted from Web Page Design by James Koster - http://www.jameskoster.co.uk - */
-/* jquery related */
-p.surprise {
-    display:none;
-    margin-bottom:5px;
-}
-p.ohmy {
-    padding:5px;
-    border:1px solid #acd373;
-    background:#fafff3;
-    margin-bottom:10px;
-}
+/* CSS Document Adapted from Web Page Design by James Koster - http://www.jameskoster.co.uk - 
+ * modified heavily by Haibao Tang - bao at uga.edu */
+
 html {
     height: 100%;
 }
@@ -186,6 +177,7 @@ li {line-height:20px;}
 	background-repeat:repeat-y;
 }
 .hover {
+    border:2px coral dotted;
 	background-color:#eeeeee;
 	background-image:url(../images/backgrounds/submenua_hover.jpg);
 	background-repeat:repeat-y;

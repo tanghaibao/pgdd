@@ -1,6 +1,9 @@
 import os
 import os.path as op
 import json
+import traceback
+import StringIO
+
 from random import randint
 
 
@@ -23,11 +26,25 @@ def write_to_file(str):
 
 # wrap the linux line feed and then convert to breaks
 line_feed = lambda stream: stream.readlines()
+remove_quote = lambda s: s.replace('\'','').replace('\"','')
+
 
 def index(req):
+    try:
+        json_out = handle(req)
+    except:
+        tb = StringIO.StringIO()
+        traceback.print_exc(file=tb)
+        json_out = dict(out_f="", cmd="", stdout_str="", stderr_str=tb.read())
+
+    return json.dumps(json_out)
+
+
+def handle(req):
 
     tree_str = req.form.get('tree', '')
     list_str = req.form.get('list', '')
+    tree_str, list_str = remove_quote(tree_str), remove_quote(list_str)
     pvalue = req.form.get('pvalue', ".01")
 
     if tree_str:
@@ -52,5 +69,5 @@ def index(req):
     out_f = out_f.replace("/var/www", "")
     json_out = dict(out_f=out_f, cmd=cmd, stdout_str=stdout_str, stderr_str=stderr_str)
 
-    return json.dumps(json_out)
+    return json_out
 

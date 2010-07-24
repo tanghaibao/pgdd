@@ -5,9 +5,17 @@ Treecut is an algorithm for identifying non-overlapping modular structures from 
 </p>
 <h1>Try this demo</h1>
 <form id="myform" enctype="multipart/form-data" method="post" action="scripts/cut.py"> 
-Please upload your tree file in Newick format: <input type="file" id="treefn" name="treefn" /><br />
+Please upload your tree file in Newick format: 
+<!--
+<input type="file" id="treefn" name="treefn" />
+-->
+<br />
 <textarea id="tree" name="tree" rows="8" cols="80"></textarea><br />
-Please upload your list file that contains values for terminal nodes: <input type="file" id="listfn" name="listfn" /><br />
+Please upload your list file that contains values for terminal nodes: 
+<!--
+<input type="file" id="listfn" name="listfn" />
+-->
+<br />
 <textarea id="list" name="list" rows="8" cols="80"></textarea><br />
 <label for="pvalue">P-value cutoff</label><input id="pvalue" name="pvalue" type="text" size="5" value="0.01"/>
 <label for="discrete">Discrete type</label><input id="discrete" name="discrete" type="checkbox" />

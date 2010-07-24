@@ -23,6 +23,10 @@ $(function() {
         }
     });
 
+    $('#tree_fn').focus(function() {
+        $('#tree').attr("disabled", "disabled");
+    });
+
     // bind form using 'ajaxForm' 
     $('#myform').ajaxForm(options); 
     $(':reset').click(function(){
@@ -33,7 +37,7 @@ $(function() {
 // pre-submit callback 
 function showRequest(formData, jqForm, options) {
     $("#display").html("<img src='/duplication/images/loading.gif' />");
-    alert($.param(formData));
+    //alert($.param(formData));
     return true; 
 } 
  

@@ -70,41 +70,9 @@ a {
 a:hover {
 	color:#2a65ad;
 }
-
-li {line-height:20px;}
-
-#menu {
-	width:100%;
-	padding-top:8px;
-	padding-bottom:8px;
-	background-color:#94AE62;
-	margin-bottom:8px;
-	color:#FFFFFF;
-	text-align:center;
-	font-family:Verdana, Arial, Helvetica, sans-serif;
-	font-size:11px;
-	font-variant:small-caps;
-	background-image:url(../images/backgrounds/menu.jpg);
+li {
+    line-height:20px;
 }
-#menu a {
-	/*color:#FFFFFF;*/
-	text-decoration:none;
-	padding:10px;
-	padding-top:20px;
-	padding-bottom:20px;
-	
-}
-#menu a:hover {
-	border-bottom:1px solid #ffffff;
-	border-left:1px solid #728d40;
-	border-right:1px solid #e9ffb7;
-	padding-left:9px;
-	padding-right:9px;
-	color:#000000;
-	/*background-color:#FFFFFF;*/
-	background-image:url(../images/backgrounds/a_hover.jpg);
-}
-
 #header {
 	width:900px;
 	margin:0 auto 0 auto;
@@ -133,7 +101,6 @@ li {line-height:20px;}
 	color:#000000;
 	border-bottom:1px solid #eeeeee;
 }
-
 #content {
     position: relative;
     min-height: 100%;
@@ -160,8 +127,6 @@ li {line-height:20px;}
 	color:#728c40;
 	text-align:right;
 }
-.submenu {
-}
 .submenu a {
 	display:block;
 	width:100%;
@@ -171,13 +136,11 @@ li {line-height:20px;}
 	padding:5px;
 	padding-right:0;
 }
-.submenu a:hover {
-	background-color:#eeeeee;
-	background-image:url(../images/backgrounds/submenua_hover.jpg);
-	background-repeat:repeat-y;
-}
 .hover {
-    border:2px coral dotted;
+    border:2px slategray solid;
+    border-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
 	background-color:#eeeeee;
 	background-image:url(../images/backgrounds/submenua_hover.jpg);
 	background-repeat:repeat-y;
@@ -189,7 +152,6 @@ li {line-height:20px;}
 	background-position:top right;
 	background-repeat:no-repeat;
 }
-
 #mainbar h1 {
 	font-family:"Century Gothic", "Trebuchet MS", sans-serif;
 	font-size:25px;
@@ -197,7 +159,6 @@ li {line-height:20px;}
 	font-weight:normal;
 	color:#728c40;
 }
-
 #mainbar p {
 	padding:0px;
 	line-height:20px;
@@ -296,8 +257,10 @@ table.stats td {
     padding:5px;
     border:1px white solid;
 }
-.ui-widget { font-family: Helvetica,Verdana,Arial,sans-serif; font-size: 1em; }
-.ui-icon
-{
+.ui-widget { 
+    font-family: Helvetica,Verdana,Arial,sans-serif; 
+    font-size: 1em; 
+}
+.ui-icon {
     display: inline-block;
 }

@@ -23,10 +23,6 @@ $(function() {
         }
     });
 
-    $('#tree_fn').focus(function() {
-        $('#tree').attr("disabled", "disabled");
-    });
-
     // bind form using 'ajaxForm' 
     $('#myform').ajaxForm(options); 
     $(':reset').click(function(){

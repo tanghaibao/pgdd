@@ -42,7 +42,9 @@ function makeResultTable(data) {
     var stdout_str = data.stdout_str;
     var res = "<tr class='hed'><td>Modules</td><td>Low/High</td><td>Mean value</td><td>P-value</td></tr>";
     for (var i=0; i<stdout_str.length; i++) {
-        var fields = stdout_str[i].split("\t");
+        var cur_row = $.trim(stdout_str[i]);
+        if (cur_row=="") continue;
+        var fields = cur_row.split("\t");
         var mrow = "";
         for (var j=0; j<fields.length; j++) {
             mrow += "<td>" + fields[j] + "</td>"
@@ -63,6 +65,6 @@ function writeOutput(data) {
     html_txt += "<b>Stderr</b>: <br />" + data.stderr_str.join("<br />") + "<br />";
     html_txt += "</div>"
     html_txt += "<img src='" + data.out_f + "' alt='' />";
-    $('#display').html(html_txt);
+    $('#display').addClass("panel").html(html_txt);
     $('#debug').toggle(function(){$('#dinfo').show(); }, function(){$('#dinfo').hide(); });
 }

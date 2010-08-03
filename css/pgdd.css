@@ -145,6 +145,15 @@ li {
 	background-image:url(../images/backgrounds/submenua_hover.jpg);
 	background-repeat:repeat-y;
 }
+.panel {
+    background-color: lavender;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    padding: 10px;
+    -moz-box-shadow:0 3px 30px black;
+    -webkit-box-shadow:0 3px 30px black;
+}
 #mainbar {
 	margin-right:150px;
 	padding-right:30px;
@@ -167,7 +176,6 @@ li {
 #mainbar .monotext {
     font-family:"Courier New", Helvetica, Arial; 
     font-size:13px;
-    padding:0px;
     line-height:20px;	
 }
 #mainbar .articleimg {

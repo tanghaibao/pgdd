@@ -4,6 +4,7 @@ import json
 import traceback
 import StringIO
 
+from subprocess import Popen, PIPE
 from random import randint
 
 
@@ -15,7 +16,7 @@ def fbuffer(f, chunk_size=10000):
       yield chunk
 
 
-def write_to_file(str):
+def write_to_file(str=None):
     fname = "tmp_%05d" % randint(0, 100000)
     fname = "/var/www/duplication/usr/" + fname
     if str:
@@ -25,11 +26,12 @@ def write_to_file(str):
     return fname
 
 # wrap the linux line feed and then convert to breaks
-line_feed = lambda stream: stream.readlines()
+line_feed = lambda stream: stream.split('\n') if stream else ""
 remove_quote = lambda s: s.replace('\'','').replace('\"','')
 
 
 def index(req):
+    #return json.dumps(handle(req))
     try:
         json_out = handle(req)
     except:
@@ -42,25 +44,25 @@ def index(req):
 
 def handle(req):
 
-    tree_str = req.form.get('tree', '')
-    list_str = req.form.get('list', '')
+    tree_str = req.form.get('tree', '').strip()
+    list_str = req.form.get('list', '').strip()
     tree_str, list_str = remove_quote(tree_str), remove_quote(list_str)
     pvalue = req.form.get('pvalue', ".01")
 
-    if tree_str:
-        tree_f = write_to_file(tree_str) 
-    if list_str:
-        list_f = write_to_file(list_str)
+    tree_f = write_to_file(tree_str) 
+    list_f = write_to_file(list_str)
 
-
-    out_f = write_to_file(None) + ".png"
+    out_f = write_to_file() + ".png"
     cmd = "MPLCONFIGDIR=/var/www/duplication/usr/ /usr/bin/python " + \
             "-W ignore::DeprecationWarning " + \
             "/var/www/duplication/apps/treecut/treecut.py " + \
             "--cutoff %s %s %s %s" % (pvalue, tree_f, list_f, out_f)
 
-    stdin, stdout, stderr = os.popen3(cmd)
-    stdout_str, stderr_str = line_feed(stdout), line_feed(stderr)
+    p = Popen(cmd, stdout=PIPE, stderr=PIPE, shell=True)
+
+    stdout, stderr = p.communicate() 
+    stdout_str = line_feed(stdout)
+    stderr_str = line_feed(stderr)
 
     # cleanup
     for f in (tree_f, list_f): 

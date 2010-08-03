@@ -7,11 +7,8 @@ def get_block_details(seg_id, lc, note):
     return "<a href='/duplication/index/block_details?seg_id=%s&amp;lc=%s&amp;note=%s' target='_blank'>"%(seg_id,lc,note)
 
 def format_seq(seq, char_per_line=80):
-    s = ''
-    for i in xrange(len(seq)/char_per_line+1):
-        s+=seq[i*char_per_line:(i+1)*char_per_line]+'<br />'
-    s+=seq[(i+1)*char_per_line:]
-    return s
+    import textwrap
+    return "<br />".join(textwrap.wrap(seq, char_per_line))
 
 def locus1(req):
     lc = cgi.escape(req.form.getfirst('lc')).strip().upper()
@@ -89,7 +86,7 @@ def show_seg(seg_id,lc,note,si,sc):
 def get_external(lc, sp):
     external = "<font color='red'> External links </font> : "
     if sp=='Arabidopsis':
-        external += """<a href='http://mips.gsf.de/cgi-bin/proj/thal/search_gene?code=%s'> MIPS </a> <a href='http://signal.salk.edu/cgi-bin/tdnaexpress?GENE=%s&amp;FUNCTION=&amp;TDNA=&amp;INTERVAL=50'> SALK </a> <a href='http://arabidopsis.org/servlets/TairObject?type=locus&amp;name=%s'> TAIR </a> <a href='http://www.floralgenome.org/tribedb/search.pl?action=keyword_results&type=id&term=%s'>PlantTribes</a> """ % (lc,lc,lc,lc) 
+        external += """<a href='http://signal.salk.edu/cgi-bin/tdnaexpress?GENE=%s&amp;FUNCTION=&amp;TDNA=&amp;INTERVAL=50'> SALK </a> <a href='http://arabidopsis.org/servlets/TairObject?type=locus&amp;name=%s'> TAIR </a> <a href='http://www.floralgenome.org/tribedb/search.pl?action=keyword_results&type=id&term=%s'>PlantTribes</a> """ % (lc,lc,lc) 
     external += "<a href='http://genomevolution.com/CoGe/FeatView.pl?accn=%s'>CoGe</a>" % lc
     return external
 

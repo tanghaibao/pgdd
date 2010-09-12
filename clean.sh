@@ -1,4 +1,4 @@
 #!/bin/bash
 
 set -v
-find usr/*.??? -mtime +2 -exec rm -f {} \;
+find usr/tmp* -mtime +2 -exec rm -f {} \;

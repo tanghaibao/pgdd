@@ -54,7 +54,6 @@ def handle(req):
 
     out_f = write_to_file() + ".png"
     cmd = "MPLCONFIGDIR=/var/www/duplication/usr/ /usr/bin/python " + \
-            "-W ignore::DeprecationWarning " + \
             "/var/www/duplication/apps/treecut/treecut.py " + \
             "--cutoff %s %s %s %s" % (pvalue, tree_f, list_f, out_f)
 

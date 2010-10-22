@@ -473,7 +473,7 @@ main(argc, argv)
   printf("Labels are 1, 2, ... no. clusters.\n"); 
   printf("Segment,  Mu,       SD, Mix.Prob, Card.\n");
   for (i=0; i<segment_number; i++) {
-      printf("%i, %f, %f, %f,  %d\n",i+1,
+      printf("#%i, %f, %f, %f,  %d\n",i+1,
       (mu[i]*(datamax-datamin)/255.0)+datamin,sd[i],segment_probs[i],
       cardinality[i]);
   }

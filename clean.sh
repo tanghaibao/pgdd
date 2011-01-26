@@ -1,5 +1,8 @@
 #!/bin/bash
 
 set -v
-find usr/tmp_[0-5]* -mtime +2 -exec rm -f {} \;
-find usr/tmp_[6-9]* -mtime +2 -exec rm -f {} \;
+
+for i in {0..9}
+    do
+        find /home/bao/duplication/usr/tmp_${i}* -mtime +2 -exec rm -f {} \;
+    done
